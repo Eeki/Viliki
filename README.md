@@ -1,4 +1,5 @@
 Viliki
 ======
 
-Eka repo!
+Viliki eli Virtuaalinen lintukirja!
+(Olen biologi :D)
