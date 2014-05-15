@@ -2,4 +2,5 @@ Viliki
 ======
 
 Viliki eli Virtuaalinen lintukirja!
-(Olen biologi :D)
+
+(koska olen biologi *:D,*)
