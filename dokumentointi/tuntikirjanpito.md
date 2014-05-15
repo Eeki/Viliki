@@ -1,6 +1,6 @@
 # Tuntikirjanpito
 
-|  P‰iv‰m‰‰r‰   | K‰ytetty aika | Mihin k‰ytettiin                                                             |
+|  P√§iv√§m√§√§r√§   | K√§ytetty aika | Mihin k√§ytettiin                                                             |
 | ------------- | ------------- |------------------------------------------------------------------------------|
-| 12.5.2014     | 	4h      |Ohjeiden luku, Git:in opettelu, projektin ymp‰ristˆn luonti jne. eli alkus‰‰tˆ|
-|               |               |                                                                              |
+| 12.5.2014     | 	   4h       |Ohjeiden luku, Git:in opettelu, projektin ymp√§rist√∂n luonti jne. eli alkus√§√§t√∂|
+| 15.5.2014     |       0.5h    |Aiheen kuvauksen hienos√§√§t√∂                                                   |
