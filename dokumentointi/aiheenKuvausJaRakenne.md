@@ -1,17 +1,17 @@
 # Aiheen kuvaus ja rakenne
 
-**Aihe**: Virtuaalinen lintukirja ja lintujen tunnistuspeli. Ohjelmassa voi opetella Suomen linnustoa kuvista, tuntomerkeistä sekä äänistä. Ohjelma koostuu kahdesta osasta, joista toinen on galleria ja toinen tunnistuspeli. Galleriassa voi selata 
-Suomen yleisimpiä lintuja. Galleria sisältää linnuista suppean lajinkuvauksen sekä kuvan. Kuvaa klikkaamalla pääsee laajempaan lajinkuvaukseen. Gallerian voi myös järjestää nimen, heimon tai elinympäristön mukaan. Lisäksi galleriasta voi etsiä yksittäisiä linntuja search- toiminnolla.
-Peli osuudessa voi testata omia taitojaan lintujen tunnistamisessa kuvan tai äänen perusteella. pelissä voi valita vastausvaihtoehdoiksi joko tekstuaalisen vastausken, jolloin pelaaja kirjoittaa linnun nimen tai neljä vaihtoehtoa joista pelaaja voi valita oikean. Peli laskee pelaajan 
-pisteet pelin päätyttyä sekä antaa palautetta. 
+**Aihe**: Virtuaalinen lintukirja ja lintujen tunnistuspeli. Ohjelmassa voi opetella Suomen linnustoa kuvista, tuntomerkeistï¿½ sekï¿½ ï¿½ï¿½nistï¿½. Ohjelma koostuu kahdesta osasta, joista toinen on galleria ja toinen tunnistuspeli. Galleriassa voi selata 
+Suomen yleisimpiï¿½ lintuja. Galleria sisï¿½ltï¿½ï¿½ linnuista suppean lajinkuvauksen sekï¿½ kuvan. Kuvaa klikkaamalla pï¿½ï¿½see laajempaan lajinkuvaukseen. Gallerian voi myï¿½s jï¿½rjestï¿½ï¿½ nimen, heimon tai elinympï¿½ristï¿½n mukaan. Lisï¿½ksi galleriasta voi etsiï¿½ yksittï¿½isiï¿½ linntuja search- toiminnolla.
+Peli osuudessa voi testata omia taitojaan lintujen tunnistamisessa kuvan tai ï¿½ï¿½nen perusteella. pelissï¿½ voi valita vastausvaihtoehdoiksi joko tekstuaalisen vastausken, jolloin pelaaja kirjoittaa linnun nimen tai neljï¿½ vaihtoehtoa joista pelaaja voi valita oikean. Peli laskee pelaajan 
+pisteet pelin pï¿½ï¿½tyttyï¿½ sekï¿½ antaa palautetta. 
 
-**Käyttäjä**: Lukija/pelaaja
+**Kï¿½yttï¿½jï¿½**: Lukija/pelaaja
 
 *Lukijan toiminnot*:
-	- Lintujen selaaminen
+	* Lintujen selaaminen
 		* Aakkosittain
 		* Luokittain
-		* Elinympäristöttäin
+		* Elinympï¿½ristï¿½ttï¿½in
 		* jne..
-	-Tunnistuspelin pelaaminen
+	*Tunnistuspelin pelaaminen
 	
