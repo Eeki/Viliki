@@ -2,9 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package viliki.virtuaalinenlintukirja;
+package viliki.virtuaalinenlintukirja.gui;
 
 import java.util.Scanner;
+import viliki.virtuaalinenlintukirja.logiikka.Galleria;
+import viliki.virtuaalinenlintukirja.logiikka.Peli;
 
 public class KayttoliittymaTxt {
 

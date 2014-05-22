@@ -1,4 +1,4 @@
-package viliki.virtuaalinenlintukirja;
+package viliki.virtuaalinenlintukirja.logiikka;
 
 public class Lintu {
 
@@ -63,5 +63,10 @@ public class Lintu {
             return this.kuva;
         }
     }
+   @Override
+   public String toString() {
+       String palautus = this.getNimi()+" ("+this.getLatina()+")";
+       return palautus;
+   }
     
 }

@@ -1,0 +1,21 @@
+
+{"linnut": [
+{
+"nimi": "Alli",
+"latina": "Allitus pallitus",
+"heimo": "Allilinnut",
+"kuva": "alli.png"
+},
+{
+"nimi": "Lokki",
+"latina": "Lokitus pokitus",
+"heimo": "Lokkilinnut",
+"kuva": "lokki.png"
+},
+{
+"nimi": "Pöllö",
+"latina": "Pöölötys pällitys",
+"heimo": "Pöllölinnut",
+"kuva": "pollo.png"
+}
+] }
