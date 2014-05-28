@@ -17,7 +17,7 @@ public class Galleria {
     }
 
     public void printtaaLinnut() {
-         HashMap<String, Lintu> lintuset = lintukirja.palautaLinnut();
+         HashMap<String, Lintu> lintuset = lintukirja.palautaLinnutMap();
         for (String string : lintuset.keySet()) {
             System.out.println(lintuset.get(string).getNimi());
         }

@@ -10,8 +10,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import viliki.virtuaalinenlintukirja.logiikka.Lintu;
-import viliki.virtuaalinenlintukirja.logiikka.Lintukirja;
+
 
 /**
  *
@@ -42,7 +41,7 @@ public class LintukirjaTest {
      public void lataaLintujaJsonista() throws Exception {
          Lintukirja kirja = new Lintukirja();
          kirja.tuoLinnutJsonTiedostosta();
-         assertTrue(0<kirja.palautaLinnut().size());
+         assertTrue(0<kirja.palautaLinnutMap().size());
          
      }
      

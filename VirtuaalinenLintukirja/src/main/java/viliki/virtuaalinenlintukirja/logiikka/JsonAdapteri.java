@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.HashMap;
-import java.util.Iterator;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -14,67 +13,12 @@ import org.json.simple.parser.ParseException;
 
 public class JsonAdapteri {
 
-//    public void kirjoita(String polku) {
-//
-//        JSONObject objekti = new JSONObject();
-//        objekti.put("nimi", "Eeki");
-//        objekti.put("ika", new Integer(100));
-//
-//        JSONArray lista = new JSONArray();
-//        lista.add("moikkaus 1");
-//        lista.add("moikkaus 2");
-//        lista.add("moikkaus 3");
-//
-//        objekti.put("message", lista);
-//        System.out.println(objekti);
-//        try {
-//            FileWriter file = new FileWriter(polku);
-//            file.write(objekti.toJSONString());
-//            file.flush();
-//            file.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-////       "src/testitiedosto.txt"
-//    }
-//
-//    public void lue(String polku) throws Exception {
-//
-//        JSONParser parser = new JSONParser();
-//
-//        try {
-//
-//            Object obj = parser.parse(new FileReader(polku));
-//
-//            JSONObject jsonObject = (JSONObject) obj;
-//
-//            String name = (String) jsonObject.get("nimi");
-//            System.out.println(name);
-//
-//            long age = (Long) jsonObject.get("ika");
-//            System.out.println(age);
-//
-//            // loop array
-//            JSONArray msg = (JSONArray) jsonObject.get("message");
-//            Iterator<String> iterator = msg.iterator();
-//            while (iterator.hasNext()) {
-//                System.out.println(iterator.next());
-//            }
-//
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
     public String tuoLinnutTiedostosta(String mista) throws Exception {
+        
         JSONParser parser = new JSONParser();
-        String jsonTeksti ="Tiedostoa ei saatu haettua";
+        String jsonTeksti = "Tiedostoa ei saatu haettua";
         try {
-            Object kokoTiedosto = parser.parse(new FileReader(mista)); //"c:\\test\\linnut2.json"
+            Object kokoTiedosto = parser.parse(new FileReader(mista));
             JSONObject jsonObject = (JSONObject) kokoTiedosto;
             StringWriter jsonKirjoittaja = new StringWriter();
             jsonObject.writeJSONString(jsonKirjoittaja);
@@ -91,36 +35,86 @@ public class JsonAdapteri {
     }
 
     public HashMap<String, Lintu> tuoLinnuistaHashMap(String mista) throws Exception {
+        //Luodaan palautettava HashMap joka sisältää lintu olioita sekä haetaan JSONArray muodossa linnut JSON tiedostosta
         HashMap<String, Lintu> palautettava = new HashMap<String, Lintu>();
-        JSONParser parser = new JSONParser();
+        JSONArray linnutLista = haeLinnutArray(mista);
+        
+        //haetaan linnutListalta kaikki linnut ja kirjoitetaan niiden parametrit yksikerrallaan lintu olioihin
+        for (int i = 0; i < linnutLista.size(); i++) {
+            JSONObject alaLista = (JSONObject) linnutLista.get(i);
+            String nimi = (String) alaLista.get("nimi");
+            String latina = (String) alaLista.get("latina");
+            String heimo = (String) alaLista.get("heimo");
+            String kuva = (String) alaLista.get("kuva");
+            palautettava.put(nimi, new Lintu(nimi, latina, heimo, kuva));
+        }
 
-        try {        
-            Object kokoTiedosto = parser.parse(tuoLinnutTiedostosta(mista));
-            JSONObject jsonObject = (JSONObject) kokoTiedosto;
-            JSONArray linnutLista = (JSONArray) jsonObject.get("linnut");
+        return palautettava;
+    }
 
-            for (int i = 0; i < linnutLista.size(); i++) {
-                JSONObject alaLista = (JSONObject) linnutLista.get(i);
-                String nimi = (String) alaLista.get("nimi");
-                String latina = (String) alaLista.get("latina");
-                String heimo = (String) alaLista.get("heimo");
-                String kuva = (String) alaLista.get("kuva");
-                palautettava.put(nimi, new Lintu(nimi, latina, heimo, kuva));
+    public void lisaaLintuTiedostoon(Lintu lintu, String lahde) throws Exception {
+        //haetaan Linnut sisältävä JSON tiedosto ja tehdään JSONArray olio, jonne kirjoitetaan linnut sisällään pitävä lista
+        JSONArray linnutLista = haeLinnutArray(lahde);
+
+        //Luodaan lisattava lintu lintu olion parametreistä
+        JSONObject lisattavaLintu = new JSONObject();
+        lisattavaLintu.put("nimi", lintu.getNimi());
+        lisattavaLintu.put("latina", lintu.getLatina());
+        lisattavaLintu.put("heimo", lintu.getHeimo());
+        lisattavaLintu.put("kuva", lintu.getKuva());
+        linnutLista.add(lisattavaLintu);
+
+        //Luodaan tyhjä JSON objekti jonne lisätäään luotu lista
+        JSONObject valmisJSON = new JSONObject();
+        valmisJSON.put("linnut", linnutLista);
+
+        //Testaa onko lisattava lintu jo listalla
+        if (onkoTalletettavaLintuJSONTiedostossa(lisattavaLintu, lahde)) {
+            kirjoitaJSONTiedostoon(valmisJSON, lahde);
+        } else {
+            System.out.println("Antamasi linnun nimi tai kuvan nimi on jo käytössä. Anna toinen nimi tai uudelleen nimeä kuvasi");
+        }
+
+    }
+
+    private void kirjoitaJSONTiedostoon(JSONObject JSONOlio, String lahde) {
+    //alpuluokka joka 
+        try {
+            FileWriter file = new FileWriter(lahde);
+            file.write(JSONOlio.toJSONString());
+            file.flush();
+            file.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean onkoTalletettavaLintuJSONTiedostossa(JSONObject talletettavaJSON, String lahde) throws Exception {
+        JSONArray linnutLista = haeLinnutArray(lahde);
+
+        for (int i = 0; i < linnutLista.size(); i++) {
+            JSONObject alaLista = (JSONObject) linnutLista.get(i);
+            if (alaLista.get("nimi").equals(talletettavaJSON.get("nimi")) || alaLista.get("kuva").equals(talletettavaJSON.get("kuva"))) {
+                return false;
             }
+        }
+        return true;
+    }
+
+    private JSONArray haeLinnutArray(String lahde) throws Exception {
+        JSONArray linnutLista = new JSONArray();
+        try {
+            JSONParser parser = new JSONParser();
+            Object kokoTiedosto = parser.parse(tuoLinnutTiedostosta(lahde));
+            JSONObject jsonObject = (JSONObject) kokoTiedosto;
+            linnutLista = (JSONArray) jsonObject.get("linnut");
 
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return palautettava;
-    }
-
-    public void lisaaLintuTiedoston(Lintu lintu) {
-        JSONObject lisattavaLintu = new JSONObject();
-        lisattavaLintu.put("nimi", lintu.getNimi());
-        lisattavaLintu.put("latina", lintu.getLatina());
-        lisattavaLintu.put("heimo", lintu.getHeimo());
-        lisattavaLintu.put("kuva", lintu.getKuva());
+        return linnutLista;
     }
 }

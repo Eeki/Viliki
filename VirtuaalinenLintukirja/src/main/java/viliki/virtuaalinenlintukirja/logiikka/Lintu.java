@@ -6,13 +6,13 @@ public class Lintu {
     private String latina;
     private String heimo;
     private String kuva;
-    
-        public Lintu(String nimi, String latina, String heimo, String kuva) {
-            this.nimi = nimi;
-            this.latina = latina;
-            this.heimo = heimo;
-            this.kuva = kuva;
-        }
+
+    public Lintu(String nimi, String latina, String heimo, String kuva) {
+        this.nimi = nimi;
+        this.latina = latina;
+        this.heimo = heimo;
+        this.kuva = kuva;
+    }
 
     //Setterit
     public void setNimi(String nimi) {
@@ -39,7 +39,7 @@ public class Lintu {
             return this.nimi;
         }
     }
-    
+
     public String getLatina() {
         if (this.latina.isEmpty()) {
             return "Latinalaista nimeä ei ole määritelty";
@@ -47,7 +47,7 @@ public class Lintu {
             return this.latina;
         }
     }
-    
+
     public String getHeimo() {
         if (this.heimo.isEmpty()) {
             return "Heimoa ei ole määritelty";
@@ -55,7 +55,7 @@ public class Lintu {
             return this.heimo;
         }
     }
-    
+
     public String getKuva() {
         if (this.kuva.isEmpty()) {
             return "Kuvaa ei ole määritelty";
@@ -63,10 +63,10 @@ public class Lintu {
             return this.kuva;
         }
     }
-   @Override
-   public String toString() {
-       String palautus = this.getNimi()+" ("+this.getLatina()+")";
-       return palautus;
-   }
-    
+
+    @Override
+    public String toString() {
+        String palautus = this.getNimi() + " (" + this.getLatina() + ")";
+        return palautus;
+    }
 }

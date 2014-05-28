@@ -5,21 +5,40 @@
 package viliki.virtuaalinenlintukirja.logiikka;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Lintukirja {
-//    File lahde = new File(getClass().getResource("/viliki/virtuaalinenlintukirja/tiedostot/linnut.json").getFile());
-    private HashMap<String,Lintu> linnut = new HashMap<String, Lintu>();
-    JsonAdapteri json = new JsonAdapteri();
-    public HashMap<String,Lintu> palautaLinnut(){
-        return linnut;
-}
-    public void tuoLinnutJsonTiedostosta() throws Exception {
+
+    String lahde;
+        
+    private HashMap<String, Lintu> linnutMap = new HashMap<String, Lintu>();
+    JsonAdapteri json;
+
+    public Lintukirja(){
         json = new JsonAdapteri();
-        this.linnut = json.tuoLinnuistaHashMap("c:\\test\\linnut2.json");
+        File lahdeTiedosto = new File(getClass().getResource("/JSON/linnut.json").getFile());
+        this.lahde = lahdeTiedosto.getPath(); 
     }
     
-    public void lisaaLintuJsonTiedostoon() {
-        
+    public HashMap<String, Lintu> palautaLinnutMap() {
+        return linnutMap;
+    }
+
+    public ArrayList<Lintu> palautaLinnutArrayList() {
+        ArrayList<Lintu> palautettavaLinnutArrayList = new ArrayList<>();
+
+        for (String lintuKey : linnutMap.keySet()) {
+            palautettavaLinnutArrayList.add(linnutMap.get(lintuKey));
+        }
+        return palautettavaLinnutArrayList;
+    }
+
+    public void tuoLinnutJsonTiedostosta() throws Exception {
+        this.linnutMap = json.tuoLinnuistaHashMap(lahde);
+    }
+
+    public void lisaaLintuJsonTiedostoon(Lintu lintu) throws Exception {
+        json.lisaaLintuTiedostoon(lintu, lahde);
     }
 }
