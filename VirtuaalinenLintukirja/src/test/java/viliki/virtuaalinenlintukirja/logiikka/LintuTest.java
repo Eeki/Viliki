@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import viliki.virtuaalinenlintukirja.logiikka.Lintu;
 
 /**
  *
@@ -38,9 +37,7 @@ public class LintuTest {
     @After
     public void tearDown() {
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    // 
+     
      @Test
      public void luoLintu() {
          assertEquals("Käki",lintu.getNimi());

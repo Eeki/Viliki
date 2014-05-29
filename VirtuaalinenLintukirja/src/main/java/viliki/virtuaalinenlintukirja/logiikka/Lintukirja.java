@@ -15,10 +15,10 @@ public class Lintukirja {
     private HashMap<String, Lintu> linnutMap = new HashMap<String, Lintu>();
     JsonAdapteri json;
 
-    public Lintukirja(){
+    public Lintukirja(String lahde){
         json = new JsonAdapteri();
-        File lahdeTiedosto = new File(getClass().getResource("/JSON/linnut.json").getFile());
-        this.lahde = lahdeTiedosto.getPath(); 
+        File lahdeTiedosto = new File(getClass().getResource(lahde).getFile());
+        this.lahde = lahdeTiedosto.getPath();
     }
     
     public HashMap<String, Lintu> palautaLinnutMap() {

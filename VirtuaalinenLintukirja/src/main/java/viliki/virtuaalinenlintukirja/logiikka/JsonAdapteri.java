@@ -14,7 +14,7 @@ import org.json.simple.parser.ParseException;
 public class JsonAdapteri {
 
     public String tuoLinnutTiedostosta(String mista) throws Exception {
-        
+
         JSONParser parser = new JSONParser();
         String jsonTeksti = "Tiedostoa ei saatu haettua";
         try {
@@ -38,7 +38,7 @@ public class JsonAdapteri {
         //Luodaan palautettava HashMap joka sisältää lintu olioita sekä haetaan JSONArray muodossa linnut JSON tiedostosta
         HashMap<String, Lintu> palautettava = new HashMap<String, Lintu>();
         JSONArray linnutLista = haeLinnutArray(mista);
-        
+
         //haetaan linnutListalta kaikki linnut ja kirjoitetaan niiden parametrit yksikerrallaan lintu olioihin
         for (int i = 0; i < linnutLista.size(); i++) {
             JSONObject alaLista = (JSONObject) linnutLista.get(i);
@@ -78,7 +78,6 @@ public class JsonAdapteri {
     }
 
     private void kirjoitaJSONTiedostoon(JSONObject JSONOlio, String lahde) {
-    //alpuluokka joka 
         try {
             FileWriter file = new FileWriter(lahde);
             file.write(JSONOlio.toJSONString());

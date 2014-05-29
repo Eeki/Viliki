@@ -22,7 +22,7 @@ public class Ruudukko extends JFrame {
 
         for (Lintu lintu : linnut) {
 
-            BufferedImage buttonIcon = ImageIO.read(new File(getClass().getResource("/kuvat/" + lintu.getKuva()).getFile())); //"/viliki/virtuaalinenlintukirja/tiedostot/kuvat/"
+            BufferedImage buttonIcon = ImageIO.read(new File(getClass().getResource("/kuvat/" + lintu.getKuva()).getFile()));
             button = new JButton(new ImageIcon(buttonIcon));
             button.setBorder(BorderFactory.createEmptyBorder());
             button.setContentAreaFilled(false);
