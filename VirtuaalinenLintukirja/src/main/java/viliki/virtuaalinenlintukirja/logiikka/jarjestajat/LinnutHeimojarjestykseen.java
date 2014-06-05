@@ -3,6 +3,10 @@ package viliki.virtuaalinenlintukirja.logiikka.jarjestajat;
 import java.util.Comparator;
 import viliki.virtuaalinenlintukirja.logiikka.Lintu;
 
+/**
+ *
+ * @author Eeki
+ */
 public class LinnutHeimojarjestykseen implements Comparator<Lintu> {
 
     @Override

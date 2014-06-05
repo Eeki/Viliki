@@ -39,14 +39,14 @@ public class LintuTest {
     }
      
      @Test
-     public void luoLintu() {
+     public void luoLintuTest() {
          assertEquals("Käki",lintu.getNimi());
          assertEquals("Cuculus canorus",lintu.getLatina());
          assertEquals("Käet",lintu.getHeimo());
          assertEquals("kaki.png",lintu.getKuva());
      }
      @Test
-     public void muutaLinnunTietoja() {
+     public void muutaLinnunTietojaTest() {
          lintu.setNimi("Kalalokki");
          lintu.setlatina("Larus canus");
          lintu.setHeimo("Lokit");
@@ -58,7 +58,7 @@ public class LintuTest {
      }
      
      @Test
-     public void toStringMetodiToimii() {
+     public void toStringMetodiToimiiTest() {
          assertEquals("Käki (Cuculus canorus)",lintu.toString());
      }
 }

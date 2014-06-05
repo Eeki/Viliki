@@ -10,8 +10,8 @@
 | 25.5.2014     |       2h      |Uusien luokkien kirjoittaminen                                                |
 | 28.5.2014     |       2h      |Testien kirjoittamista                                                        |
 | 29.5.2014     |       3h      |Lisää testejä, uusi luokkakaavio, graafisen käyttöliittymän hiomista          |
-|               |               |                                                                              |
-|               |               |                                                                              |
+|  1.5.2014     |       4h      |Gui uusiksi                                                                   |
+|  5.6.2014     |       3h      |Testejä, javaDoc uusia metodeita jne                                          |
 
 
 

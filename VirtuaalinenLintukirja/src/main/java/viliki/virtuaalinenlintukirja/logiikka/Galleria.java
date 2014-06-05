@@ -4,25 +4,46 @@
  */
 package viliki.virtuaalinenlintukirja.logiikka;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import javax.swing.JFrame;
-import viliki.virtuaalinenlintukirja.gui.Ruudukko;
+import java.util.Collections;
+import viliki.virtuaalinenlintukirja.logiikka.jarjestajat.LinnutAakkosjarjestykseen;
+import viliki.virtuaalinenlintukirja.logiikka.jarjestajat.LinnutHeimojarjestykseen;
 
+/**
+ * Galleria on viela keskenerainen luokka. Talla hetkella se voi jarjastella
+ * lintuja joko aakkosten tai heimon perusteella
+ *
+ *
+ */
 public class Galleria {
-    private ArrayList<Lintu> linnut = new ArrayList<Lintu>();
-    private Ruudukko ruudukko;
-    
-    public Galleria(Lintukirja kirja) {
-        System.out.println("Galleria avattu");
-        linnut = kirja.palautaLinnutArrayList();
+
+    /**
+     *
+     */
+    public Galleria() {
     }
-    
-    public void avaaGalleriaNakyma() throws IOException {
-        this.ruudukko = new Ruudukko(linnut);  
-        ruudukko.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ruudukko.pack();
-        ruudukko.setVisible(true);
+
+    /**
+     *
+     * @param linnutArray
+     * @return
+     */
+    public ArrayList<Lintu> jarjestaGalleriaAakkos(ArrayList<Lintu> linnutArray) {
+        LinnutAakkosjarjestykseen jarkkari = new LinnutAakkosjarjestykseen();
+        ArrayList<Lintu> palautettavatLinnutArray = linnutArray;
+        Collections.sort(palautettavatLinnutArray, jarkkari);
+        return palautettavatLinnutArray;
+    }
+
+    /**
+     *
+     * @param linnutArray
+     * @return
+     */
+    public ArrayList<Lintu> jarjestaGalleriaHeimo(ArrayList<Lintu> linnutArray) {
+        LinnutHeimojarjestykseen jarkkari = new LinnutHeimojarjestykseen();
+        ArrayList<Lintu> palautettavatLinnutArray = linnutArray;
+        Collections.sort(palautettavatLinnutArray, jarkkari);
+        return palautettavatLinnutArray;
     }
 }

@@ -11,21 +11,21 @@ import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
-import viliki.virtuaalinenlintukirja.logiikka.Galleria;
+import viliki.virtuaalinenlintukirja.logiikka.Lintukirja;
 
-public class Alkuvalikko implements Runnable {
+public class AlkuvalikkoGui implements Runnable {
 
     private JFrame frame;
-    private Galleria galleria;
     private JButton galleriaNappi;
     private JButton pelinappi;
     private JButton lisaaLintuNappi;
-    
-    public Alkuvalikko(Galleria galleria) {
-        this.galleria = galleria;
+    private Lintukirja kirja;
+
+    public AlkuvalikkoGui(Lintukirja kirja) {
+        this.kirja = kirja;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class Alkuvalikko implements Runnable {
     }
 
     private void luoKomponentit(Container container) {
-        container.add(new JTextArea());
+        container.add(new JLabel("Virtuaalinen lintukirja"));
         container.add(luoValikko(), BorderLayout.SOUTH);
 
     }
@@ -48,7 +48,6 @@ public class Alkuvalikko implements Runnable {
     public JFrame getFrame() {
         return frame;
     }
-
 
     private JPanel luoValikko() {
         luoNapit();
@@ -58,7 +57,7 @@ public class Alkuvalikko implements Runnable {
         panel.add(pelinappi);
         panel.add(lisaaLintuNappi);
 
-        
+
         return panel;
     }
 
@@ -69,28 +68,47 @@ public class Alkuvalikko implements Runnable {
                 try {
                     avaaGalleria();
                 } catch (IOException ex) {
-                    Logger.getLogger(Alkuvalikko.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AlkuvalikkoGui.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }));
-        
-        pelinappi = new JButton("Peli");
-        lisaaLintuNappi = new JButton("Lisaa lintu");
-        
+
+        pelinappi = new JButton(new AbstractAction("Peli") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    avaaPeli();
+                } catch (IOException ex) {
+                    Logger.getLogger(AlkuvalikkoGui.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        lisaaLintuNappi = new JButton(new AbstractAction("lisaa lintu") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    avaaLisaaLintu();
+            }
+        });
+
 
 
 
     }
-    
+
     private void avaaGalleria() throws IOException {
-        this.galleria.avaaGalleriaNakyma();
+        RuudukkoGui ruudukko = new RuudukkoGui(kirja);
+        ruudukko.pack();
+        ruudukko.setVisible(true);
+
     }
-    
-    private void avaaPeli() {
-        
+
+    private void avaaPeli() throws IOException {
+        PeliGui peli = new PeliGui(kirja.palautaLinnutArrayList());
+        peli.setVisible(true);
     }
-    
+
     private void avaaLisaaLintu() {
-        
+        LisaaLintuGui lisaa = new LisaaLintuGui(kirja);
+        lisaa.setVisible(true);
     }
 }

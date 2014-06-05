@@ -1,37 +1,80 @@
 package viliki.virtuaalinenlintukirja.logiikka;
 
-public class Lintu {
+import java.text.Normalizer;
+import java.util.Comparator;
+/**
+ * Tämä luokka ilmentää lintua. Linnulla on aina nimi, tieteellinen nimi (latinalainen nimi), heimo sekä kuva.
+ * 
+ */
+public class Lintu implements Comparator<Lintu>{
 
     private String nimi;
     private String latina;
     private String heimo;
     private String kuva;
+    private String selitys;
 
+    /**
+     *
+     * @param nimi
+     * @param latina
+     * @param heimo
+     * @param kuva
+     */
     public Lintu(String nimi, String latina, String heimo, String kuva) {
         this.nimi = nimi;
         this.latina = latina;
         this.heimo = heimo;
-        this.kuva = kuva;
+        this.kuva = kuva; 
+        this.selitys = poistaSkandit(nimi);
     }
 
     //Setterit
+    /**
+     *
+     * @param nimi
+     */
     public void setNimi(String nimi) {
         this.nimi = nimi;
     }
 
+    /**
+     *
+     * @param latina
+     */
     public void setlatina(String latina) {
         this.latina = latina;
     }
 
+    /**
+     *
+     * @param heimo
+     */
     public void setHeimo(String heimo) {
         this.heimo = heimo;
     }
 
+    /**
+     *
+     * @param kuva
+     */
     public void setKuva(String kuva) {
         this.kuva = kuva;
     }
+    
+    /**
+     *
+     * @param selitys
+     */
+    public void setSelitys(String selitys) {
+        this.selitys = selitys;
+    }
 
     //Getterit
+    /**
+     *
+     * @return
+     */
     public String getNimi() {
         if (this.nimi.isEmpty()) {
             return "Nimeä ei ole määritelty";
@@ -40,6 +83,10 @@ public class Lintu {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public String getLatina() {
         if (this.latina.isEmpty()) {
             return "Latinalaista nimeä ei ole määritelty";
@@ -48,6 +95,10 @@ public class Lintu {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public String getHeimo() {
         if (this.heimo.isEmpty()) {
             return "Heimoa ei ole määritelty";
@@ -56,6 +107,10 @@ public class Lintu {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public String getKuva() {
         if (this.kuva.isEmpty()) {
             return "Kuvaa ei ole määritelty";
@@ -63,10 +118,40 @@ public class Lintu {
             return this.kuva;
         }
     }
+    
+    /**
+     *
+     * @return
+     */
+    public String getSelitys() {
+        if (this.selitys.isEmpty()) {
+            return "Selityksen polkua ei ole määritetty";
+        } else {
+            return this.selitys;
+        }
+    }
 
     @Override
     public String toString() {
         String palautus = this.getNimi() + " (" + this.getLatina() + ")";
         return palautus;
+    }
+    
+    /**
+     *
+     * @param input
+     * @return
+     */
+    public String poistaSkandit(String input){
+        String convertedString = 
+       Normalizer
+           .normalize(input, Normalizer.Form.NFD)
+           .replaceAll("[^\\p{ASCII}]", "");
+        return convertedString;
+    }
+
+    @Override
+    public int compare(Lintu lintu1, Lintu lintu2) {
+        return lintu1.getNimi().compareToIgnoreCase(lintu2.getNimi());
     }
 }

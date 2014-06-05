@@ -11,8 +11,19 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+/**
+ * JsonAdapteri hakee ja kirjoittaa tietoa JSON tiedostoon, jota käytetään tässä
+ * ohjelmassa tiedon tallentamiseen
+ *
+ */
 public class JsonAdapteri {
 
+    /**
+     *
+     * @param mista
+     * @return
+     * @throws Exception
+     */
     public String tuoLinnutTiedostosta(String mista) throws Exception {
 
         JSONParser parser = new JSONParser();
@@ -34,6 +45,12 @@ public class JsonAdapteri {
         return jsonTeksti;
     }
 
+    /**
+     *
+     * @param mista
+     * @return
+     * @throws Exception
+     */
     public HashMap<String, Lintu> tuoLinnuistaHashMap(String mista) throws Exception {
         //Luodaan palautettava HashMap joka sisältää lintu olioita sekä haetaan JSONArray muodossa linnut JSON tiedostosta
         HashMap<String, Lintu> palautettava = new HashMap<String, Lintu>();
@@ -52,6 +69,12 @@ public class JsonAdapteri {
         return palautettava;
     }
 
+    /**
+     *
+     * @param lintu
+     * @param lahde
+     * @throws Exception
+     */
     public void lisaaLintuTiedostoon(Lintu lintu, String lahde) throws Exception {
         //haetaan Linnut sisältävä JSON tiedosto ja tehdään JSONArray olio, jonne kirjoitetaan linnut sisällään pitävä lista
         JSONArray linnutLista = haeLinnutArray(lahde);

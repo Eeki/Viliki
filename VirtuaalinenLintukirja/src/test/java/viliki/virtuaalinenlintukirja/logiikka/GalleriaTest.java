@@ -1,6 +1,7 @@
 package viliki.virtuaalinenlintukirja.logiikka;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -8,14 +9,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-
 public class GalleriaTest {
 
     Galleria galleria;
-    Lintukirja kirja = new Lintukirja("/testit/linnutTestGalleria.json");
+    Lintukirja kirja;
+    ArrayList<Lintu> linnut;
 
     public GalleriaTest() {
-        galleria = new Galleria(kirja);
+        galleria = new Galleria();
     }
 
     @BeforeClass
@@ -27,7 +28,11 @@ public class GalleriaTest {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
+        kirja = new Lintukirja("/testit/linnutTest.json");
+        kirja.tuoLinnutJsonTiedostosta();
+        linnut = kirja.palautaLinnutArrayList();
+
     }
 
     @After
@@ -35,9 +40,15 @@ public class GalleriaTest {
     }
 
     @Test
-    public void avaaGalleriaNakyma() throws IOException {
-        this.galleria.avaaGalleriaNakyma();
-        assertEquals("", "");
-        //tähän pitäisi sitten keksiä testejä...
+    public void jarjestaGalleriaAakkosTest() throws IOException {
+        linnut = galleria.jarjestaGalleriaAakkos(linnut);
+        assertEquals("[Alli (allitus), Naurulokki (lokitus naurutus), Pikkulokki (lokitus pikkutus), Punarinta (Punkutus)]", linnut.toString());
+
+    }
+    
+    @Test
+    public void jarjestaGalleriaHeimoTest() {
+        linnut = galleria.jarjestaGalleriaHeimo(linnut);
+        assertEquals("[Alli (allitus), Pikkulokki (lokitus pikkutus), Naurulokki (lokitus naurutus), Punarinta (Punkutus)]", linnut.toString());
     }
 }

@@ -1,8 +1,8 @@
 
 {"linnut":[
-           {"nimi":"Alli","latina":"allitus","heimo":"Allilinnut","kuva":"alli.jpg"},
-           {"nimi":"Pikkulokki","latina":"lokitus pikkutus","heimo":"Lokit","kuva":"haahka.jpg"},
-           {"nimi":"Punarinta","latina":"Punkutus","heimo":"AAA","kuva":"pr.jpg"},
-           {"nimi":"Naurulokki","latina":"lokitus naurutus","heimo":"Lokit","kuva":"naurulokki.jpg"}
+           {"nimi":"Alli","latina":"Clangula hyemalis","heimo":"Sorsat","kuva":"alli.png"},
+           {"nimi":"Haahka","latina":"Somateria mollissima","heimo":"Sorsat","kuva":"haahka.png"},
+           {"nimi":"Naurulokki","latina":"Larus ridibundus","heimo":"Lokit","kuva":"naurulokki.png"},
+           {"nimi":"Metsähanhi","latina":"Anser fabalis","heimo":"Sorsat","kuva":"metsahanhi.png"}
          ]
 }
