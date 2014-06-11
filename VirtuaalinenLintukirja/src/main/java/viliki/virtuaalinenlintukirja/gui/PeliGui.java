@@ -51,7 +51,7 @@ public class PeliGui extends javax.swing.JFrame {
         OKButton = new javax.swing.JButton();
         vastausKentta = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         arvattavaLintuKuva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kuvat/alli.png"))); // NOI18N
 

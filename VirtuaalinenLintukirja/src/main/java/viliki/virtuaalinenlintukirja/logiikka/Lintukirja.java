@@ -16,8 +16,9 @@ import java.util.HashMap;
 public class Lintukirja {
 
     String lahde;
-    private HashMap<String, Lintu> linnutMap = new HashMap<String, Lintu>();
+    private HashMap<String, Lintu> linnutMap = new HashMap<>();
     JsonAdapteri json;
+    KuvaTallentaja kuvaTallentaja;
 
     /**
      *
@@ -27,6 +28,7 @@ public class Lintukirja {
         json = new JsonAdapteri();
         File lahdeTiedosto = new File(getClass().getResource(lahde).getFile());
         this.lahde = lahdeTiedosto.getPath();
+        this.kuvaTallentaja = new KuvaTallentaja();
     }
 
     /**
@@ -63,7 +65,8 @@ public class Lintukirja {
      * @param lintu
      * @throws Exception
      */
-    public void lisaaLintuJsonTiedostoon(Lintu lintu) throws Exception {
+    public void lisaaLintuJsonTiedostoon(Lintu lintu, String lahde) throws Exception {
+        kuvaTallentaja.tallennaKuva(lahde, lintu.getKuva(), "jpg");
         json.lisaaLintuTiedostoon(lintu, lahde);
     }
 }

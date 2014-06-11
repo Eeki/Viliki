@@ -21,7 +21,7 @@ public class JsonAdapteri {
     /**
      *
      * @param mista
-     * @return
+     * @return 
      * @throws Exception
      */
     public String tuoLinnutTiedostosta(String mista) throws Exception {
@@ -36,11 +36,9 @@ public class JsonAdapteri {
             jsonTeksti = jsonKirjoittaja.toString();
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
+            ErrorPopUp.popUpErrori("JSON Tiedostoa " + mista + " ei löydy... sori dyde!", "JsonAdapteri");
+        } catch (IOException | ParseException e) {
+            ErrorPopUp.popUpErrori("JSON tiedoston tuonti epäonnistui... mietippä sitä :D", "JsonAdapteri");
         }
         return jsonTeksti;
     }

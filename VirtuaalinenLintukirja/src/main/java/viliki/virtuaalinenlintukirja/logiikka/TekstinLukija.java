@@ -18,17 +18,22 @@ public class TekstinLukija {
      * @throws IOException
      */
     public String lueTeksti(String file) throws IOException {
-        File lahdeTiedosto = new File(getClass().getResource(file).getFile());
-        BufferedReader reader = new BufferedReader(new FileReader(lahdeTiedosto.getPath()));
-        String line = null;
-        StringBuilder stringBuilder = new StringBuilder();
-        String ls = System.getProperty("line.separator");
+        try {
+            File lahdeTiedosto = new File(getClass().getResource(file).getFile());
+            BufferedReader reader = new BufferedReader(new FileReader(lahdeTiedosto.getPath()));
+            String line = null;
+            StringBuilder stringBuilder = new StringBuilder();
+            String ls = System.getProperty("line.separator");
 
-        while ((line = reader.readLine()) != null) {
-            stringBuilder.append(line);
-            stringBuilder.append(ls);
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line);
+                stringBuilder.append(ls);
+            }
+
+            return stringBuilder.toString();
+
+        } catch (NullPointerException ex) {
+            return "Linnulla ei selitystä";
         }
-
-        return stringBuilder.toString();
     }
 }

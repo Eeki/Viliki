@@ -46,4 +46,8 @@ public class Galleria {
         Collections.sort(palautettavatLinnutArray, jarkkari);
         return palautettavatLinnutArray;
     }
+    
+    public ArrayList<Lintu> etsiLintu() {
+        return null;
+    }
 }

@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+import viliki.virtuaalinenlintukirja.logiikka.ErrorPopUp;
 import viliki.virtuaalinenlintukirja.logiikka.Lintukirja;
 
 public class AlkuvalikkoGui implements Runnable {
@@ -94,9 +95,11 @@ public class AlkuvalikkoGui implements Runnable {
 
 
     }
+    
 
     private void avaaGalleria() throws IOException {
         RuudukkoGui ruudukko = new RuudukkoGui(kirja);
+        ruudukko.luoRuudukko();
         ruudukko.pack();
         ruudukko.setVisible(true);
 

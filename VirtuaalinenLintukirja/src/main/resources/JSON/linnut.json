@@ -3,6 +3,12 @@
            {"nimi":"Alli","latina":"Clangula hyemalis","heimo":"Sorsat","kuva":"alli.png"},
            {"nimi":"Haahka","latina":"Somateria mollissima","heimo":"Sorsat","kuva":"haahka.png"},
            {"nimi":"Naurulokki","latina":"Larus ridibundus","heimo":"Lokit","kuva":"naurulokki.png"},
-           {"nimi":"Metsähanhi","latina":"Anser fabalis","heimo":"Sorsat","kuva":"metsahanhi.png"}
+           {"nimi":"Metsähanhi","latina":"Anser fabalis","heimo":"Hanhet","kuva":"metsahanhi.png"},
+           {"nimi":"Harmaalokki","latina":"Larus argentatus","heimo":"Lokit","kuva":"harmaalokki.png"},
+           {"nimi":"Käki","latina":"Cuculus canorus","heimo":"Käet","kuva":"kaki.png"},
+           {"nimi":"Kalalokki","latina":"Larus canus","heimo":"lokit","kuva":"kalalokki.png"},
+           {"nimi":"Kalatiira","latina":"Sterna hirundo","heimo":"Tiirat","kuva":"kalatiira.png"},
+           {"nimi":"Kanadanhanhi","latina":"Branta canadensis","heimo":"Hanhet","kuva":"kanadanhanhi.png"},
+           {"nimi":"Kyhmyjoutsen","latina":"Cygnus olor","heimo":"Joutsenet","kuva":"kyhmyjoutsen.png"}
          ]
 }

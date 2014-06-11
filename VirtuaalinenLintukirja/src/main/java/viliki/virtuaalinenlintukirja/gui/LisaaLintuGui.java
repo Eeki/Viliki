@@ -5,6 +5,7 @@
 package viliki.virtuaalinenlintukirja.gui;
 
 import javax.swing.JFileChooser;
+import viliki.virtuaalinenlintukirja.logiikka.Lintu;
 import viliki.virtuaalinenlintukirja.logiikka.Lintukirja;
 
 
@@ -18,6 +19,11 @@ public class LisaaLintuGui extends javax.swing.JFrame {
         tiedostonValitsin = new JFileChooser();
         
     }
+    
+    private void lisaaLintu(String nimi, String latina, String heimo, String kuva, String polku) throws Exception {
+        lintukirja.lisaaLintuJsonTiedostoon(new Lintu(nimi, latina, heimo, kuva), polku);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,7 +47,7 @@ public class LisaaLintuGui extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jButtonBrowse = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Lisää lintu");
@@ -78,6 +84,11 @@ public class LisaaLintuGui extends javax.swing.JFrame {
         });
 
         jButtonLisaaTietokantaan.setText("Lisaa tietokantaan");
+        jButtonLisaaTietokantaan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLisaaTietokantaanActionPerformed(evt);
+            }
+        });
 
         jTextFieldkuvanPolku.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,6 +188,10 @@ public class LisaaLintuGui extends javax.swing.JFrame {
     private void jButtonBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBrowseActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonBrowseActionPerformed
+
+    private void jButtonLisaaTietokantaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLisaaTietokantaanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonLisaaTietokantaanActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

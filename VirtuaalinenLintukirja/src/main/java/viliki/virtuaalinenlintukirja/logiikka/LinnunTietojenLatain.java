@@ -29,12 +29,20 @@ public class LinnunTietojenLatain {
      * @return
      * @throws IOException
      */
+    
+
+    //Jos tiedoston polku ei ole oikea tekee errorin eikä heitä exeptionia... korjaa!
     public BufferedImage lataaKuva(Lintu lintu) throws IOException {
-        BufferedImage kuva = null;
+   
+        BufferedImage kuva ;
         try {
-            kuva = ImageIO.read(new File(getClass().getResource("/kuvat/" + lintu.getKuva()).getFile()));
-        } catch (IOException ex) {
-            System.out.println("Kuvan lataaminen epäonnistui");
+            File filu = new File(getClass().getResource("/kuvat/" + lintu.getKuva()).getFile());
+            kuva = ImageIO.read(filu);     
+        } catch (IOException ex) {    
+            System.out.println(ex);
+            kuva = ImageIO.read(new File(getClass().getResource("/kuvat/"+"noImage.png").getFile()));
+            ErrorPopUp.popUpErrori("Kuvaa ei löydy", "Linnun tietojen latain");
+            return kuva;
         }
 
         return kuva;
@@ -49,7 +57,11 @@ public class LinnunTietojenLatain {
      */
     public String lataaSelitys(Lintu lintu) throws IOException {
         TekstinLukija lukija = new TekstinLukija();
-        String palautettava = lukija.lueTeksti("/selitykset/" + lintu.getSelitys() + ".txt");
-        return palautettava;
+        try {
+            String palautettava = lukija.lueTeksti("/selitykset/" + lintu.getSelitys() + ".txt");
+            return palautettava;
+        }catch(IOException ex) {
+            return "Linnulla ei selitystä";
+        }
     }
 }
