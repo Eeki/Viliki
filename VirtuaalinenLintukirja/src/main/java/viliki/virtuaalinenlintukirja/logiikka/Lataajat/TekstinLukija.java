@@ -1,4 +1,4 @@
-package viliki.virtuaalinenlintukirja.logiikka;
+package viliki.virtuaalinenlintukirja.logiikka.Lataajat;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -32,7 +32,7 @@ public class TekstinLukija {
 
             return stringBuilder.toString();
 
-        } catch (NullPointerException ex) {
+        } catch (Exception ex) {
             return "Linnulla ei selitystä";
         }
     }

@@ -4,12 +4,15 @@
  */
 package viliki.virtuaalinenlintukirja.gui;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import viliki.virtuaalinenlintukirja.logiikka.Lintu;
 import viliki.virtuaalinenlintukirja.logiikka.Lintukirja;
-
+import viliki.virtuaalinenlintukirja.logiikka.TyokaluPakki;
 
 public class LisaaLintuGui extends javax.swing.JFrame {
+
     JFileChooser tiedostonValitsin;
     Lintukirja lintukirja;
 
@@ -17,13 +20,18 @@ public class LisaaLintuGui extends javax.swing.JFrame {
         initComponents();
         this.lintukirja = lintukirja;
         tiedostonValitsin = new JFileChooser();
-        
+
     }
-    
-    private void lisaaLintu(String nimi, String latina, String heimo, String kuva, String polku) throws Exception {
-        lintukirja.lisaaLintuJsonTiedostoon(new Lintu(nimi, latina, heimo, kuva), polku);
+
+    private void lisaaLintu(String nimi, String latina, String heimo, String kuva, String kuvanlahde, String selitys) throws Exception {
+        if (tarkistaTietojenOikeus()) {
+            lintukirja.lisaaLintuTiedostoon(new Lintu(nimi, latina, heimo, kuva), kuvanlahde, TyokaluPakki.kuvaFormaatti(kuvanlahde), selitys);
+        }
     }
-    
+
+    private boolean tarkistaTietojenOikeus() {
+        return true;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,9 +51,12 @@ public class LisaaLintuGui extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButtonPeruuta = new javax.swing.JButton();
         jButtonLisaaTietokantaan = new javax.swing.JButton();
-        jTextFieldkuvanPolku = new javax.swing.JTextField();
+        jTextFieldKuvanPolku = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jButtonBrowse = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextAreaSelitys = new javax.swing.JTextArea();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -90,13 +101,13 @@ public class LisaaLintuGui extends javax.swing.JFrame {
             }
         });
 
-        jTextFieldkuvanPolku.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldKuvanPolku.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldkuvanPolkuActionPerformed(evt);
+                jTextFieldKuvanPolkuActionPerformed(evt);
             }
         });
 
-        jLabel5.setText("Lisää linnulle kuva");
+        jLabel5.setText("Lisää linnulle selitys");
 
         jButtonBrowse.setText("Browse");
         jButtonBrowse.addActionListener(new java.awt.event.ActionListener() {
@@ -104,6 +115,12 @@ public class LisaaLintuGui extends javax.swing.JFrame {
                 jButtonBrowseActionPerformed(evt);
             }
         });
+
+        jTextAreaSelitys.setColumns(20);
+        jTextAreaSelitys.setRows(5);
+        jScrollPane1.setViewportView(jTextAreaSelitys);
+
+        jLabel6.setText("Lisää linnulle kuva");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,17 +137,17 @@ public class LisaaLintuGui extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextFieldHeimo)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextFieldkuvanPolku)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButtonPeruuta))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonBrowse, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 141, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonLisaaTietokantaan)))
+                        .addComponent(jButtonBrowse, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                        .addComponent(jButtonPeruuta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonLisaaTietokantaan))
+                    .addComponent(jTextFieldKuvanPolku)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -151,15 +168,22 @@ public class LisaaLintuGui extends javax.swing.JFrame {
                 .addComponent(jTextFieldHeimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
-                .addGap(5, 5, 5)
-                .addComponent(jTextFieldkuvanPolku, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonBrowse)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonPeruuta)
-                    .addComponent(jButtonLisaaTietokantaan))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldKuvanPolku, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonPeruuta)
+                            .addComponent(jButtonLisaaTietokantaan)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jButtonBrowse)))
+                .addContainerGap())
         );
 
         pack();
@@ -177,23 +201,39 @@ public class LisaaLintuGui extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldHeimoActionPerformed
 
-    private void jTextFieldkuvanPolkuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldkuvanPolkuActionPerformed
+    private void jTextFieldKuvanPolkuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldKuvanPolkuActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldkuvanPolkuActionPerformed
+    }//GEN-LAST:event_jTextFieldKuvanPolkuActionPerformed
 
     private void jButtonPeruutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPeruutaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonPeruutaActionPerformed
 
     private void jButtonBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBrowseActionPerformed
-        // TODO add your handling code here:
+
+        this.tiedostonValitsin.showOpenDialog(null);
+        try {
+            String kuvanPolku = this.tiedostonValitsin.getSelectedFile().getAbsolutePath();
+            if (!kuvanPolku.isEmpty()) {
+                this.jTextFieldKuvanPolku.setText(kuvanPolku);
+            }
+        } catch (Exception e) {
+            System.out.println("Ei valintaa");
+        }
+
+
+
     }//GEN-LAST:event_jButtonBrowseActionPerformed
-
     private void jButtonLisaaTietokantaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLisaaTietokantaanActionPerformed
-        // TODO add your handling code here:
+        try {
+            lisaaLintu(jTextFieldNimi.getText(), jTextFieldLatina.getText(), jTextFieldHeimo.getText(), TyokaluPakki.poistaSkandit(jTextFieldNimi.getText()), jTextFieldKuvanPolku.getText(), jTextAreaSelitys.getText());
+        } catch (Exception ex) {
+            TyokaluPakki.popUpViesti("Linnun lisääminen epäonnistui", "Lisaa lintu GUI");
+            Logger
+                    .getLogger(LisaaLintuGui.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonLisaaTietokantaanActionPerformed
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBrowse;
     private javax.swing.JButton jButtonLisaaTietokantaan;
@@ -203,9 +243,12 @@ public class LisaaLintuGui extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextAreaSelitys;
     private javax.swing.JTextField jTextFieldHeimo;
+    private javax.swing.JTextField jTextFieldKuvanPolku;
     private javax.swing.JTextField jTextFieldLatina;
     private javax.swing.JTextField jTextFieldNimi;
-    private javax.swing.JTextField jTextFieldkuvanPolku;
     // End of variables declaration//GEN-END:variables
 }

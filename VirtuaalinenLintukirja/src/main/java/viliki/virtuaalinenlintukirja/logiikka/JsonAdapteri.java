@@ -36,9 +36,9 @@ public class JsonAdapteri {
             jsonTeksti = jsonKirjoittaja.toString();
 
         } catch (FileNotFoundException e) {
-            ErrorPopUp.popUpErrori("JSON Tiedostoa " + mista + " ei löydy... sori dyde!", "JsonAdapteri");
+            TyokaluPakki.popUpViesti("JSON Tiedostoa " + mista + " ei löydy", "JsonAdapteri");
         } catch (IOException | ParseException e) {
-            ErrorPopUp.popUpErrori("JSON tiedoston tuonti epäonnistui... mietippä sitä :D", "JsonAdapteri");
+            TyokaluPakki.popUpViesti("JSON tiedoston tuonti epäonnistui... mietippä sitä :D", "JsonAdapteri");
         }
         return jsonTeksti;
     }
@@ -73,7 +73,7 @@ public class JsonAdapteri {
      * @param lahde
      * @throws Exception
      */
-    public void lisaaLintuTiedostoon(Lintu lintu, String lahde) throws Exception {
+    public boolean lisaaLintuTiedostoon(Lintu lintu, String lahde) throws Exception {
         //haetaan Linnut sisältävä JSON tiedosto ja tehdään JSONArray olio, jonne kirjoitetaan linnut sisällään pitävä lista
         JSONArray linnutLista = haeLinnutArray(lahde);
 
@@ -92,18 +92,20 @@ public class JsonAdapteri {
         //Testaa onko lisattava lintu jo listalla
         if (onkoTalletettavaLintuJSONTiedostossa(lisattavaLintu, lahde)) {
             kirjoitaJSONTiedostoon(valmisJSON, lahde);
+            return true;
         } else {
-            System.out.println("Antamasi linnun nimi tai kuvan nimi on jo käytössä. Anna toinen nimi tai uudelleen nimeä kuvasi");
+            TyokaluPakki.popUpViesti("Antamasi linnun nimi on jo käytössä. Anna toinen nimi", "JsonAdapteri");
+            return false;
         }
 
     }
 
     private void kirjoitaJSONTiedostoon(JSONObject JSONOlio, String lahde) {
         try {
-            FileWriter file = new FileWriter(lahde);
-            file.write(JSONOlio.toJSONString());
-            file.flush();
-            file.close();
+            try (FileWriter file = new FileWriter(lahde)) {
+                file.write(JSONOlio.toJSONString());
+                file.flush();
+            }
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -6,7 +6,7 @@ package viliki.virtuaalinenlintukirja.gui;
 
 import java.io.IOException;
 import javax.swing.ImageIcon;
-import viliki.virtuaalinenlintukirja.logiikka.LinnunTietojenLatain;
+import viliki.virtuaalinenlintukirja.logiikka.Lataajat.LinnunTietojenLatain;
 import viliki.virtuaalinenlintukirja.logiikka.Lintu;
 
 /**
@@ -95,8 +95,8 @@ public class LinnunKuvausGui extends javax.swing.JFrame {
         this.nimiLabel.setText(this.lintu.getNimi());
         this.latinaLabel.setText("(" + this.lintu.getLatina() + ")");
         this.heimoLabel.setText("Heimo: " + this.lintu.getHeimo());
-        this.linnunKuva.setIcon(new ImageIcon(latain.lataaKuva(lintu)));
-        this.kuvausTextArea.setText(latain.lataaSelitys(lintu));
+        this.linnunKuva.setIcon(new ImageIcon(latain.lataaKuva(lintu,"kuvat")));
+        this.kuvausTextArea.setText(latain.lataaSelitys(lintu,"selitykset"));
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel heimoLabel;

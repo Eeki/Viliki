@@ -1,5 +1,6 @@
 package viliki.virtuaalinenlintukirja.logiikka;
 
+import viliki.virtuaalinenlintukirja.logiikka.Lataajat.LinnunTietojenLatain;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -25,7 +26,7 @@ public class JImageButtoneidenLuoja {
             JNappaimet[i] = new JButton(linnut.get(i).getNimi());
             JNappaimet[i].setSize(80, 80);
             JNappaimet[i].setActionCommand(linnut.get(i).getNimi());
-            JNappaimet[i].setIcon(new ImageIcon(latain.lataaKuva(linnut.get(i))));
+            JNappaimet[i].setIcon(new ImageIcon(latain.lataaKuva(linnut.get(i),"kuvat")));
             JNappaimet[i].setVerticalTextPosition(SwingConstants.BOTTOM);
             JNappaimet[i].setHorizontalTextPosition(SwingConstants.CENTER);
 
@@ -38,7 +39,7 @@ public class JImageButtoneidenLuoja {
                         kuvaus.asetaTiedot();
                     } catch (IOException ex) {
                         Logger.getLogger(RuudukkoGui.class.getName()).log(Level.SEVERE, null, ex);
-                        ErrorPopUp.popUpErrori("Virhe linnun kuvauksen asettamisessa", valinnanNimi);
+                        TyokaluPakki.popUpViesti("Virhe linnun kuvauksen asettamisessa", valinnanNimi);
                     }
                     kuvaus.setVisible(true);
                 }
@@ -48,7 +49,7 @@ public class JImageButtoneidenLuoja {
         return JNappaimet;
     }
 
-    private HashMap<String, Lintu> teeTuoduistaLinnuistaMap(ArrayList<Lintu> linnut) {
+    public HashMap<String, Lintu> teeTuoduistaLinnuistaMap(ArrayList<Lintu> linnut) {
         HashMap<String, Lintu> palautettavaLintuMap = new HashMap<>();
         for (Lintu lintu : linnut) {
             palautettavaLintuMap.put(lintu.getNimi(), lintu);

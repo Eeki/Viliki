@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import viliki.virtuaalinenlintukirja.logiikka.LinnunTietojenLatain;
+import viliki.virtuaalinenlintukirja.logiikka.Lataajat.LinnunTietojenLatain;
 import viliki.virtuaalinenlintukirja.logiikka.Lintu;
 import viliki.virtuaalinenlintukirja.logiikka.PeliLogiikka;
 
@@ -135,7 +135,7 @@ public class PeliGui extends javax.swing.JFrame {
         vastaus = this.vastausKentta.getText();
         System.out.println(linnut.get(this.kierrokset).getNimi());
 
-        if (vastaus.equals(linnut.get(this.kierrokset).getNimi())) {
+        if (vastaus.toLowerCase().equals(linnut.get(this.kierrokset).getNimi().toLowerCase())) {
             oikeaVastaus();
         } else {
             vaaraVastaus();
@@ -161,7 +161,7 @@ public class PeliGui extends javax.swing.JFrame {
         if (this.kierrokset < this.linnut.size()) {
             this.pisteetTeksti.setText("Pisteet: " + this.pisteet);
             this.kierroksetTeksti.setText("Kierrokset: " + this.kierrokset + "/" + this.linnut.size());
-            this.arvattavaLintuKuva.setIcon(new ImageIcon(latain.lataaKuva(linnut.get(this.kierrokset))));
+            this.arvattavaLintuKuva.setIcon(new ImageIcon(latain.lataaKuva(linnut.get(this.kierrokset),"kuvat")));
         } else {
             lopetaPeli();
         }

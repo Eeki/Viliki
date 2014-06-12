@@ -14,7 +14,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-import viliki.virtuaalinenlintukirja.logiikka.ErrorPopUp;
 import viliki.virtuaalinenlintukirja.logiikka.Lintukirja;
 
 public class AlkuvalikkoGui implements Runnable {

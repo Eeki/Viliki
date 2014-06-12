@@ -2,12 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package viliki.virtuaalinenlintukirja.logiikka;
+package viliki.virtuaalinenlintukirja.logiikka.Lataajat;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import viliki.virtuaalinenlintukirja.logiikka.Lintu;
 
 /**
  *
@@ -32,16 +33,15 @@ public class LinnunTietojenLatain {
     
 
     //Jos tiedoston polku ei ole oikea tekee errorin eikä heitä exeptionia... korjaa!
-    public BufferedImage lataaKuva(Lintu lintu) throws IOException {
+    public BufferedImage lataaKuva(Lintu lintu, String lahdeKansio) throws IOException {
    
         BufferedImage kuva ;
         try {
-            File filu = new File(getClass().getResource("/kuvat/" + lintu.getKuva()).getFile());
+            File filu = new File(getClass().getResource("/"+lahdeKansio+"/" + lintu.getKuva()).getFile());
             kuva = ImageIO.read(filu);     
-        } catch (IOException ex) {    
+        } catch (Exception ex) {    
             System.out.println(ex);
             kuva = ImageIO.read(new File(getClass().getResource("/kuvat/"+"noImage.png").getFile()));
-            ErrorPopUp.popUpErrori("Kuvaa ei löydy", "Linnun tietojen latain");
             return kuva;
         }
 
@@ -55,10 +55,10 @@ public class LinnunTietojenLatain {
      * @return
      * @throws IOException
      */
-    public String lataaSelitys(Lintu lintu) throws IOException {
+    public String lataaSelitys(Lintu lintu, String lahdeKansio) throws IOException {
         TekstinLukija lukija = new TekstinLukija();
         try {
-            String palautettava = lukija.lueTeksti("/selitykset/" + lintu.getSelitys() + ".txt");
+            String palautettava = lukija.lueTeksti("/"+lahdeKansio+"/" + lintu.getSelitys() + ".txt");
             return palautettava;
         }catch(IOException ex) {
             return "Linnulla ei selitystä";

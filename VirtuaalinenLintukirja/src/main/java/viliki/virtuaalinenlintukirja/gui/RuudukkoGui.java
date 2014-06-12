@@ -24,7 +24,7 @@ public class RuudukkoGui extends javax.swing.JFrame {
 
     public void luoRuudukko() throws IOException {
         Container panel = getContentPane();
-        panel.setLayout(new GridLayout(3, linnut.size()));
+        panel.setLayout(new GridLayout(3, linnut.size()/3));
 
         for (JButton jButton : JbuttonLuoja.luoImageButtoneita(linnut)) {
             panel.add(jButton);

@@ -2,11 +2,13 @@ package viliki.virtuaalinenlintukirja.logiikka;
 
 import java.text.Normalizer;
 import java.util.Comparator;
+
 /**
- * Tämä luokka ilmentää lintua. Linnulla on aina nimi, tieteellinen nimi (latinalainen nimi), heimo sekä kuva.
- * 
+ * Tämä luokka ilmentää lintua. Linnulla on aina nimi, tieteellinen nimi
+ * (latinalainen nimi), heimo sekä kuva.
+ *
  */
-public class Lintu implements Comparator<Lintu>{
+public class Lintu implements Comparator<Lintu> {
 
     private String nimi;
     private String latina;
@@ -25,8 +27,8 @@ public class Lintu implements Comparator<Lintu>{
         this.nimi = nimi;
         this.latina = latina;
         this.heimo = heimo;
-        this.kuva = kuva; 
-        this.selitys = poistaSkandit(nimi);
+        this.kuva = kuva;
+        this.selitys = TyokaluPakki.poistaSkandit(nimi);
     }
 
     //Setterit
@@ -61,7 +63,7 @@ public class Lintu implements Comparator<Lintu>{
     public void setKuva(String kuva) {
         this.kuva = kuva;
     }
-    
+
     /**
      *
      * @param selitys
@@ -89,7 +91,7 @@ public class Lintu implements Comparator<Lintu>{
      */
     public String getLatina() {
         if (this.latina.isEmpty()) {
-            return "Latinalaista nimeä ei ole määritelty";
+            return "Tieteellistä nimeä ei ole määritelty";
         } else {
             return this.latina;
         }
@@ -118,7 +120,7 @@ public class Lintu implements Comparator<Lintu>{
             return this.kuva;
         }
     }
-    
+
     /**
      *
      * @return
@@ -135,19 +137,6 @@ public class Lintu implements Comparator<Lintu>{
     public String toString() {
         String palautus = this.getNimi() + " (" + this.getLatina() + ")";
         return palautus;
-    }
-    
-    /**
-     *
-     * @param input
-     * @return
-     */
-    public String poistaSkandit(String input){
-        String convertedString = 
-       Normalizer
-           .normalize(input, Normalizer.Form.NFD)
-           .replaceAll("[^\\p{ASCII}]", "");
-        return convertedString;
     }
 
     @Override
