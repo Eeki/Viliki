@@ -9,6 +9,13 @@
            {"nimi":"Kalalokki","latina":"Larus canus","heimo":"lokit","kuva":"kalalokki.png"},
            {"nimi":"Kalatiira","latina":"Sterna hirundo","heimo":"Tiirat","kuva":"kalatiira.png"},
            {"nimi":"Kanadanhanhi","latina":"Branta canadensis","heimo":"Hanhet","kuva":"kanadanhanhi.png"},
-           {"nimi":"Kyhmyjoutsen","latina":"Cygnus olor","heimo":"Joutsenet","kuva":"kyhmyjoutsen.png"}
+           {"nimi":"Kyhmyjoutsen","latina":"Cygnus olor","heimo":"Joutsenet","kuva":"kyhmyjoutsen.png"},
+           {"nimi":"Talitiainen","latina":"Parus major","heimo":"Tiaiset","kuva":"talitiainen.png"},
+           {"nimi":"Sinitiainen","latina":"Cyanistes caeruleus","heimo":"Tiaiset","kuva":"sinitiainen.png"},
+           {"nimi":"Merihanhi","latina":"Anser anser","heimo":"Hanhet","kuva":"merihanhi.png"},
+           {"nimi":"Punasotka","latina":"Aythya ferina","heimo":"Sotkat","kuva":"punasotka.png"},
+           {"nimi":"Selkälokki","latina":"Larus fuscus","heimo":"Lokit","kuva":"selkalokki.png"},
+           {"nimi":"Sepelkyyhky","latina":"Columba palumbus","heimo":"Kyyhkyt","kuva":"sepelkyyhky.png"},
+           {"nimi":"Telkkä","latina":"Bucephala clangula","heimo":"Telkät","kuva":"telkka.png"},
          ]
 }

@@ -5,6 +5,7 @@
 package viliki.virtuaalinenlintukirja.logiikka;
 
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import viliki.virtuaalinenlintukirja.logiikka.tallentajat.KuvaTallentaja;
@@ -29,8 +30,9 @@ public class Lintukirja {
      */
     public Lintukirja(String lahde) {
         json = new JsonAdapteri();
-        File lahdeTiedosto = new File(getClass().getResource(lahde).getFile());
+        File lahdeTiedosto = new File(this.getClass().getResource(lahde).getFile());
         this.lahde = lahdeTiedosto.getPath();
+        System.out.println(this.lahde);
         this.kuvaTallentaja = new KuvaTallentaja();
         this.selityksenTallentaja = new SelityksenTallentaja();
     }
@@ -69,17 +71,20 @@ public class Lintukirja {
      * @param lintu
      * @throws Exception
      */
-    public void lisaaLintuTiedostoon(Lintu lintu, String kuvanLahde, String formaatti, String selitys) throws Exception {
+    public boolean lisaaLintuTiedostoon(Lintu lintu, String kuvanLahde, String selitys) throws Exception {
         // tämä metodi lisää JSON tiedostoon linnun parametrit + /kuvat/ kansioon linnun kuvan ja /selitykset/ kansioon linnun selityksen
-        if (kuvaTallentaja.tallennaKuva(kuvanLahde, lintu.getKuva(), formaatti)) {
+        if (kuvaTallentaja.tallennaKuva(kuvanLahde, lintu.getKuva(),"kuvat")) {
             if (json.lisaaLintuTiedostoon(lintu, this.lahde)) {
-                this.selityksenTallentaja.tallennaSelitys(selitys, lintu.getNimi());
+                this.selityksenTallentaja.tallennaSelitys(selitys, lintu.getNimi(),"selitykset");
                 tuoLinnutJsonTiedostosta(); // ladataan linnut uudelleen
                 TyokaluPakki.popUpViesti("Lintu lisättiin lintukirjaan", "Lintukirja");
+                return true;
             } else {
                 TyokaluPakki.popUpViesti("Lintua ei lisätty lintukirjaan", "Lintukirja");
+                return false;
             }
         }
+        return false;
 
 
     }

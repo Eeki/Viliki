@@ -13,13 +13,14 @@ public class TekstinLukija {
 
     /**
      *
-     * @param file
-     * @return
-     * @throws IOException
+     * @param String tiedostonimi
+     * @return String .txt tiedoston siältö
+     * @throws IOException jos metodi heittää virheen, se palauttaa string:n
+     * "Linnulla ei selitystä"
      */
-    public String lueTeksti(String file) throws IOException {
+    public String lueTeksti(String tiedostonimi) throws IOException {
         try {
-            File lahdeTiedosto = new File(getClass().getResource(file).getFile());
+            File lahdeTiedosto = new File(getClass().getResource(tiedostonimi).getFile());
             BufferedReader reader = new BufferedReader(new FileReader(lahdeTiedosto.getPath()));
             String line = null;
             StringBuilder stringBuilder = new StringBuilder();

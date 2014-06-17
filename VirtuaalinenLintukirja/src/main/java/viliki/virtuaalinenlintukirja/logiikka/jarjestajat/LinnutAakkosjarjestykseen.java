@@ -5,7 +5,7 @@ import viliki.virtuaalinenlintukirja.logiikka.Lintu;
 
 /**
  *
- * @author Eeki
+ * Apuluokka joka järjestää lintu oliot aakkosjärjestykseen
  */
 public class LinnutAakkosjarjestykseen implements Comparator<Lintu> {
 

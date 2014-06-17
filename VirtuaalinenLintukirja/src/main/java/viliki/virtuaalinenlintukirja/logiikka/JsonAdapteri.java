@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringWriter;
 import java.util.HashMap;
 import org.json.simple.JSONArray;
@@ -14,7 +15,6 @@ import org.json.simple.parser.ParseException;
 /**
  * JsonAdapteri hakee ja kirjoittaa tietoa JSON tiedostoon, jota käytetään tässä
  * ohjelmassa tiedon tallentamiseen
- *
  */
 public class JsonAdapteri {
 
@@ -28,6 +28,7 @@ public class JsonAdapteri {
 
         JSONParser parser = new JSONParser();
         String jsonTeksti = "Tiedostoa ei saatu haettua";
+        InputStream is = this.getClass().getResourceAsStream("/JSON/linnut.json");
         try {
             Object kokoTiedosto = parser.parse(new FileReader(mista));
             JSONObject jsonObject = (JSONObject) kokoTiedosto;

@@ -18,15 +18,9 @@ import viliki.virtuaalinenlintukirja.logiikka.jarjestajat.LinnutHeimojarjestykse
 public class Galleria {
 
     /**
-     *
-     */
-    public Galleria() {
-    }
-
-    /**
-     *
+     *Metodi järjestää lintulistan aakkosjärjestykseen LinnutAakkosjarjestykseen luokan avulla
      * @param linnutArray
-     * @return
+     * @return aakkosjärjestyksessä oleva ArrayList<Lintu> 
      */
     public ArrayList<Lintu> jarjestaGalleriaAakkos(ArrayList<Lintu> linnutArray) {
         LinnutAakkosjarjestykseen jarkkari = new LinnutAakkosjarjestykseen();
@@ -36,9 +30,9 @@ public class Galleria {
     }
 
     /**
-     *
+     *Metodi järjestää lintulistan heimojärjestykseen LinnutHeimojarjestykseen luokan avulla
      * @param linnutArray
-     * @return
+     * @return heimojärjestyksessä oleva ArrayList<Lintu>
      */
     public ArrayList<Lintu> jarjestaGalleriaHeimo(ArrayList<Lintu> linnutArray) {
         LinnutHeimojarjestykseen jarkkari = new LinnutHeimojarjestykseen();
@@ -47,6 +41,10 @@ public class Galleria {
         return palautettavatLinnutArray;
     }
     
+    /**
+     *
+     * @return
+     */
     public ArrayList<Lintu> etsiLintu() {
         return null;
     }

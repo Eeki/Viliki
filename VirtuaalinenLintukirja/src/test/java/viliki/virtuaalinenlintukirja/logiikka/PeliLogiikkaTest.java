@@ -43,12 +43,10 @@ public class PeliLogiikkaTest {
     }
 
     @Test
-    public void sekoitaKierroksenLinnutTest() {
-        ArrayList<String> alku = new ArrayList<>();
-        for (Lintu lintu : linnut) {
-            alku.add(lintu.getNimi());
-        }
-        ArrayList<String> sekoitettu = pelilogiikka.sekoitaKierroksenLinnut(linnut);
-        assertNotSame(sekoitettu, alku);
+    public void sekoitaKierroksenLinnutTest() {  
+        ArrayList<Lintu> sekoitettu = new ArrayList<>();
+        sekoitettu.addAll(pelilogiikka.sekoitaKierroksenLinnut(linnut));
+        
+        assertNotSame(sekoitettu, linnut);
     }
 }

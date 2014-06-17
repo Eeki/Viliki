@@ -4,6 +4,7 @@
  */
 package viliki.virtuaalinenlintukirja.logiikka;
 
+import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -56,4 +57,13 @@ public class TyokaluPakkiTest {
      public void popUpViestiTest() {
          assertTrue(TyokaluPakki.popUpViesti("testiviesti... paina ok", "testit"));
      }
+     
+         @Test
+    public void teeTuoduistaLinnuistaMapTest() {
+        ArrayList<Lintu> linnut = new ArrayList<>();
+        linnut.add(new Lintu("a","a","a","a"));
+        linnut.add(new Lintu("b","b","b","b"));
+        assertTrue(TyokaluPakki.teeTuoduistaLinnuistaMap(linnut).containsKey("a"));
+
+    }
 }

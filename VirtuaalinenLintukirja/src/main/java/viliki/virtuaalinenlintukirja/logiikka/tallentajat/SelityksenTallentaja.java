@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package viliki.virtuaalinenlintukirja.logiikka.tallentajat;
 
 import java.io.BufferedWriter;
@@ -13,20 +9,24 @@ import viliki.virtuaalinenlintukirja.logiikka.TyokaluPakki;
 
 /**
  *
- * @author Eeki
+ * Tallentaa annetun String primitiivin .txt tiedostoksi valittuun resources/
+ * kansioon
  */
 public class SelityksenTallentaja {
 
     /**
+     * Metodi tallentaa annetun String primitiivin .txt tiedostoksi valittuun
+     * resources/ kansioon. Jos tallennus onnistuu palautetaan true, jos
+     * epäonnistuu false.
      *
      * @param selitys
      * @param nimi
      * @param tallennuksenKohde
-     * @return
+     * @return Boolean
      */
-    public boolean tallennaSelitys(String selitys, String nimi) {
+    public boolean tallennaSelitys(String selitys, String nimi, String kohde) {
         try {
-            File tallennusFilu = new File(this.getClass().getResource("/selitykset/").getPath() + TyokaluPakki.poistaSkandit(nimi) + ".txt");
+            File tallennusFilu = new File(this.getClass().getResource("/" + kohde + "/").getPath() + TyokaluPakki.poistaSkandit(nimi) + ".txt");
             FileOutputStream os = new FileOutputStream(tallennusFilu);
             OutputStreamWriter osw = new OutputStreamWriter(os);
             Writer w = new BufferedWriter(osw);

@@ -39,6 +39,6 @@ public class SelityksenTallentajaTest {
     @Test
     public void tallennaSelitysTest() {
         SelityksenTallentaja seliTal = new SelityksenTallentaja();
-        assertEquals(true, seliTal.tallennaSelitys("testi", "testi.txt"));
+        assertEquals(true, seliTal.tallennaSelitys("testi", "testi.txt","selitykset"));
     }
 }

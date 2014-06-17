@@ -18,6 +18,10 @@ public class LinnunKuvausGui extends javax.swing.JFrame {
     private LinnunTietojenLatain latain;
     private Lintu lintu;
 
+    /**
+     *
+     * @param lintu
+     */
     public LinnunKuvausGui(Lintu lintu) {
         initComponents();
         this.lintu = lintu;
@@ -36,41 +40,53 @@ public class LinnunKuvausGui extends javax.swing.JFrame {
 
         nimiLabel = new javax.swing.JLabel();
         linnunKuva = new javax.swing.JLabel();
-        kuvausTextArea = new javax.swing.JTextArea();
         latinaLabel = new javax.swing.JLabel();
         heimoLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        kuvausTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(400, 600));
 
         nimiLabel.setBackground(new java.awt.Color(255, 255, 255));
-        nimiLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        nimiLabel.setFont(new java.awt.Font("Engravers MT", 1, 24)); // NOI18N
+        nimiLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nimiLabel.setText("Nimi");
 
         linnunKuva.setBackground(new java.awt.Color(255, 255, 255));
-
-        kuvausTextArea.setEditable(false);
-        kuvausTextArea.setColumns(20);
-        kuvausTextArea.setRows(5);
+        linnunKuva.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         latinaLabel.setBackground(new java.awt.Color(255, 255, 255));
         latinaLabel.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        latinaLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         latinaLabel.setText("Latina");
 
         heimoLabel.setBackground(new java.awt.Color(255, 255, 255));
         heimoLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        heimoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         heimoLabel.setText("Heimo");
+
+        kuvausTextArea.setEditable(false);
+        kuvausTextArea.setColumns(20);
+        kuvausTextArea.setLineWrap(true);
+        kuvausTextArea.setTabSize(0);
+        kuvausTextArea.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(kuvausTextArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(latinaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(linnunKuva, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(nimiLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
-                    .addComponent(heimoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(kuvausTextArea))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(latinaLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(heimoLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(nimiLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(linnunKuva, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -78,19 +94,23 @@ public class LinnunKuvausGui extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(nimiLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(latinaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(latinaLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(heimoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(heimoLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(linnunKuva, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(kuvausTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     *
+     * @throws IOException
+     */
     public void asetaTiedot() throws IOException {
         this.nimiLabel.setText(this.lintu.getNimi());
         this.latinaLabel.setText("(" + this.lintu.getLatina() + ")");
@@ -100,6 +120,7 @@ public class LinnunKuvausGui extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel heimoLabel;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea kuvausTextArea;
     private javax.swing.JLabel latinaLabel;
     private javax.swing.JLabel linnunKuva;

@@ -4,6 +4,8 @@
  */
 package viliki.virtuaalinenlintukirja.gui;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -12,27 +14,44 @@ import javax.swing.ImageIcon;
 import viliki.virtuaalinenlintukirja.logiikka.Lataajat.LinnunTietojenLatain;
 import viliki.virtuaalinenlintukirja.logiikka.Lintu;
 import viliki.virtuaalinenlintukirja.logiikka.PeliLogiikka;
+import viliki.virtuaalinenlintukirja.logiikka.TyokaluPakki;
 
+/**
+ *
+ * @author Eeki
+ */
 public class PeliGui extends javax.swing.JFrame {
 
     PeliLogiikka logiikka;
     ArrayList<Lintu> linnut;
     int pisteet;
     int kierrokset;
-    ArrayList<String> kierroksenLinnut;
+    int pelattavatKierrokset;
     LinnunTietojenLatain latain;
 
+    /**
+     *
+     * @param linnut
+     * @throws IOException
+     */
     public PeliGui(ArrayList<Lintu> linnut) throws IOException {
         initComponents();
         this.logiikka = new PeliLogiikka();
         this.linnut = linnut;
         this.latain = new LinnunTietojenLatain();
+        luoKeylistener();
         alustaPeli();
     }
 
     private void alustaPeli() throws IOException {
+        sekoitaLinnut();
         this.pisteet = 0;
         this.kierrokset = 0;
+        if (linnut.size() < 10) {
+            this.pelattavatKierrokset = linnut.size();
+        } else {
+            this.pelattavatKierrokset = 10;
+        }
         paivitaKierroksetPisteetJaKuva();
     }
 
@@ -117,11 +136,10 @@ public class PeliGui extends javax.swing.JFrame {
     }//GEN-LAST:event_OKButtonActionPerformed
 
     private void vastausKenttaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vastausKenttaMouseClicked
-        if(this.vastausKentta.getText().equals("Kirjoita vastaus tähän ja klikkaa OK...")) {
+        if (this.vastausKentta.getText().equals("Kirjoita vastaus tähän ja klikkaa OK...")) {
             this.vastausKentta.setText("");
         }
     }//GEN-LAST:event_vastausKenttaMouseClicked
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton OKButton;
     private javax.swing.JLabel arvattavaLintuKuva;
@@ -158,17 +176,38 @@ public class PeliGui extends javax.swing.JFrame {
     }
 
     private void paivitaKierroksetPisteetJaKuva() throws IOException {
-        if (this.kierrokset < this.linnut.size()) {
+        if (this.kierrokset < pelattavatKierrokset) {
             this.pisteetTeksti.setText("Pisteet: " + this.pisteet);
-            this.kierroksetTeksti.setText("Kierrokset: " + this.kierrokset + "/" + this.linnut.size());
-            this.arvattavaLintuKuva.setIcon(new ImageIcon(latain.lataaKuva(linnut.get(this.kierrokset),"kuvat")));
+            this.kierroksetTeksti.setText("Kierrokset: " + this.kierrokset + "/" + pelattavatKierrokset);
+            this.arvattavaLintuKuva.setIcon(new ImageIcon(latain.lataaKuva(linnut.get(this.kierrokset), "kuvat")));
         } else {
             lopetaPeli();
         }
     }
 
-    
-    private void lopetaPeli() throws IOException{
+    private void lopetaPeli() throws IOException {
+        TyokaluPakki.popUpViesti("Peli loppui: Sait " + this.pisteet + " / " + this.kierrokset + " oikein", "Tunnistuspeli");
         alustaPeli();
+    }
+
+    private void luoKeylistener() {
+        this.vastausKentta.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    try {
+                        tarkistaOikeaVastaus();
+                    } catch (IOException ex) {
+                        Logger.getLogger(PeliGui.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        });
+    }
+
+    private void sekoitaLinnut() {
+        ArrayList<Lintu> sekoitettava = new ArrayList<>();
+        sekoitettava.addAll(this.logiikka.sekoitaKierroksenLinnut(linnut));
+        this.linnut = sekoitettava;
     }
 }

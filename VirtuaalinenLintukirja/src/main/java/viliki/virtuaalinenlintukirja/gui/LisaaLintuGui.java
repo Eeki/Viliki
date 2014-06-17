@@ -4,6 +4,7 @@
  */
 package viliki.virtuaalinenlintukirja.gui;
 
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -11,11 +12,19 @@ import viliki.virtuaalinenlintukirja.logiikka.Lintu;
 import viliki.virtuaalinenlintukirja.logiikka.Lintukirja;
 import viliki.virtuaalinenlintukirja.logiikka.TyokaluPakki;
 
+/**
+ *
+ * @author Eeki
+ */
 public class LisaaLintuGui extends javax.swing.JFrame {
 
     JFileChooser tiedostonValitsin;
     Lintukirja lintukirja;
 
+    /**
+     *
+     * @param lintukirja
+     */
     public LisaaLintuGui(Lintukirja lintukirja) {
         initComponents();
         this.lintukirja = lintukirja;
@@ -25,7 +34,9 @@ public class LisaaLintuGui extends javax.swing.JFrame {
 
     private void lisaaLintu(String nimi, String latina, String heimo, String kuva, String kuvanlahde, String selitys) throws Exception {
         if (tarkistaTietojenOikeus()) {
-            lintukirja.lisaaLintuTiedostoon(new Lintu(nimi, latina, heimo, kuva), kuvanlahde, TyokaluPakki.kuvaFormaatti(kuvanlahde), selitys);
+            if(lintukirja.lisaaLintuTiedostoon(new Lintu(nimi, latina, heimo, kuva), kuvanlahde, selitys)){
+                this.dispose();
+            }
         }
     }
 
@@ -49,7 +60,6 @@ public class LisaaLintuGui extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextFieldHeimo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jButtonPeruuta = new javax.swing.JButton();
         jButtonLisaaTietokantaan = new javax.swing.JButton();
         jTextFieldKuvanPolku = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -86,13 +96,6 @@ public class LisaaLintuGui extends javax.swing.JFrame {
         });
 
         jLabel4.setText("Lisää linnulle heimo");
-
-        jButtonPeruuta.setText("Peruuta");
-        jButtonPeruuta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonPeruutaActionPerformed(evt);
-            }
-        });
 
         jButtonLisaaTietokantaan.setText("Lisaa tietokantaan");
         jButtonLisaaTietokantaan.addActionListener(new java.awt.event.ActionListener() {
@@ -139,9 +142,7 @@ public class LisaaLintuGui extends javax.swing.JFrame {
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonBrowse, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
-                        .addComponent(jButtonPeruuta)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
                         .addComponent(jButtonLisaaTietokantaan))
                     .addComponent(jTextFieldKuvanPolku)
                     .addGroup(layout.createSequentialGroup()
@@ -177,9 +178,7 @@ public class LisaaLintuGui extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonPeruuta)
-                            .addComponent(jButtonLisaaTietokantaan)))
+                        .addComponent(jButtonLisaaTietokantaan))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jButtonBrowse)))
@@ -204,10 +203,6 @@ public class LisaaLintuGui extends javax.swing.JFrame {
     private void jTextFieldKuvanPolkuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldKuvanPolkuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldKuvanPolkuActionPerformed
-
-    private void jButtonPeruutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPeruutaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonPeruutaActionPerformed
 
     private void jButtonBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBrowseActionPerformed
 
@@ -237,7 +232,6 @@ public class LisaaLintuGui extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBrowse;
     private javax.swing.JButton jButtonLisaaTietokantaan;
-    private javax.swing.JButton jButtonPeruuta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

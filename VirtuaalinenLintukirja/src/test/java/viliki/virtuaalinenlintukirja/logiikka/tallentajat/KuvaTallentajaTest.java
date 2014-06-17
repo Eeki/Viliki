@@ -42,6 +42,6 @@ public class KuvaTallentajaTest {
 
     @Test
     public void tallennaKuvaTest() throws IOException {
-        assertEquals(true, this.tallentaja.tallennaKuva(this.getClass().getResource("/testit/alliTest.png").getPath(), "kuva", "png"));
+        assertEquals(true, this.tallentaja.tallennaKuva(this.getClass().getResource("/testit/alliTest.png").getPath(), "kuvaxxx","kuvat"));
     }
 }

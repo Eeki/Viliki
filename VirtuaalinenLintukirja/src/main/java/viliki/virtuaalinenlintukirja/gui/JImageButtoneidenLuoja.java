@@ -1,5 +1,6 @@
-package viliki.virtuaalinenlintukirja.logiikka;
+package viliki.virtuaalinenlintukirja.gui;
 
+import java.awt.Dimension;
 import viliki.virtuaalinenlintukirja.logiikka.Lataajat.LinnunTietojenLatain;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,20 +12,30 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
-import viliki.virtuaalinenlintukirja.gui.LinnunKuvausGui;
-import viliki.virtuaalinenlintukirja.gui.RuudukkoGui;
+import viliki.virtuaalinenlintukirja.logiikka.Lintu;
+import viliki.virtuaalinenlintukirja.logiikka.TyokaluPakki;
 
+/**
+ *
+ * Luokka luo listan ImageButtoneita annettujen lintujen perusteella
+ */
 public class JImageButtoneidenLuoja {
 
+    /**
+     *Metodi luo ja palauttaa listan JButtoneita. JButtoneiden nimet ja kuvat tulevat lintu olioiden mukaan
+     * @param ArrayList<Lintu> linnut
+     * @return JButton[]
+     * @throws IOException
+     */
     public JButton[] luoImageButtoneita(ArrayList<Lintu> linnut) throws IOException {
         LinnunTietojenLatain latain = new LinnunTietojenLatain();
         JButton[] JNappaimet = new JButton[linnut.size()];
-        final HashMap<String, Lintu> linnutMap = teeTuoduistaLinnuistaMap(linnut);
+        final HashMap<String, Lintu> linnutMap = TyokaluPakki.teeTuoduistaLinnuistaMap(linnut);
 
 
         for (int i = 0; i < JNappaimet.length; i++) {
             JNappaimet[i] = new JButton(linnut.get(i).getNimi());
-            JNappaimet[i].setSize(80, 80);
+            JNappaimet[i].setPreferredSize(new Dimension(320, 270));
             JNappaimet[i].setActionCommand(linnut.get(i).getNimi());
             JNappaimet[i].setIcon(new ImageIcon(latain.lataaKuva(linnut.get(i),"kuvat")));
             JNappaimet[i].setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -47,14 +58,5 @@ public class JImageButtoneidenLuoja {
 
         }
         return JNappaimet;
-    }
-
-    public HashMap<String, Lintu> teeTuoduistaLinnuistaMap(ArrayList<Lintu> linnut) {
-        HashMap<String, Lintu> palautettavaLintuMap = new HashMap<>();
-        for (Lintu lintu : linnut) {
-            palautettavaLintuMap.put(lintu.getNimi(), lintu);
-        }
-        return palautettavaLintuMap;
-    }
-    
+    }    
 }

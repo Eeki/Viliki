@@ -4,6 +4,7 @@
  */
 package viliki.virtuaalinenlintukirja.logiikka;
 
+import viliki.virtuaalinenlintukirja.gui.JImageButtoneidenLuoja;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JButton;
@@ -42,14 +43,7 @@ public class JImageButtoneidenLuojaTest {
     public void tearDown() {
     }
 
-    @Test
-    public void teeTuoduistaLinnuistaMapTest() {
-        ArrayList<Lintu> linnut = new ArrayList<>();
-        linnut.add(new Lintu("a","a","a","a"));
-        linnut.add(new Lintu("b","b","b","b"));
-        assertTrue(luoja.teeTuoduistaLinnuistaMap(linnut).containsKey("a"));
 
-    }
     
     @Test
     public void luoImageButtoneitaTest() throws IOException{
