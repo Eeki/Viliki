@@ -17,7 +17,10 @@ public class KuvaTallentaja {
      * talletus onnistuu palauttaa metodi boolean arvon true, jos ei palautetaan
      * false.
      *
+     * @param polku
      * @param String polku
+     * @param talletusPolku
+     * @param kuvanNimi
      * @param String kuvanNimi
      * @return Boolean true
      * @throws IOException jos metodi heittää virheen eli kuvan tallentaminen
@@ -25,11 +28,13 @@ public class KuvaTallentaja {
      */
     public boolean tallennaKuva(String polku, String kuvanNimi, String talletusPolku) throws IOException {
         try {
+            //Lataa kuva levyltä kuvan polkua pitkin
             BufferedImage luettavaKuva = ImageIO.read(new File(polku));
-//            luettavaKuva = TyokaluPakki.kuvanSovittaja(luettavaKuva);
-            File tallennetteva = new File(this.getClass().getResource("/" + talletusPolku + "/").getPath() + kuvanNimi);
+            //Luo kuvalle pailla Resources/kuvat/ kansiosta
+            File tallennetteva = new File(talletusPolku + kuvanNimi);
+            //Kirjoita kuva
             ImageIO.write(luettavaKuva, TyokaluPakki.kuvaFormaatti(polku), tallennetteva);
-            System.out.println("Kuva " + kuvanNimi + " tallennettiin");
+            System.out.println("Kuva " + tallennetteva.getPath() + " tallennettiin");
             return true;
         } catch (Exception e) {
             System.out.println(e);

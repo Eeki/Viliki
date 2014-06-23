@@ -4,7 +4,15 @@
  */
 package viliki.virtuaalinenlintukirja.gui;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.Reader;
+import java.nio.charset.Charset;
 import javax.swing.ImageIcon;
 import viliki.virtuaalinenlintukirja.logiikka.Lataajat.LinnunTietojenLatain;
 import viliki.virtuaalinenlintukirja.logiikka.Lintu;
@@ -112,11 +120,27 @@ public class LinnunKuvausGui extends javax.swing.JFrame {
      * @throws IOException
      */
     public void asetaTiedot() throws IOException {
+    String selitys = latain.lataaSelitys(lintu, "Resources/selitykset/");
+    Charset.forName("UTF-8").encode(selitys);
+    
+//        String juttu = latain.lataaSelitys(lintu, "Resources/selitykset/");
+//        byte[] b = juttu.getBytes("UTF-8");
+//        InputStreamReader isr = new InputStreamReader(new ByteArrayInputStream((latain.lataaSelitys(lintu, "Resources/selitykset/")).getBytes()), "UTF-8");
+//        BufferedReader br = new BufferedReader(isr);
+//        String line = null;
+//
+//        while ((line = br.readLine()) != null) {
+//            this.kuvausTextArea.setText(line);
+//        }
+//        String line = convertToUTF8(latain.lataaSelitys(lintu, "Resources/selitykset/"));
+        this.kuvausTextArea.setText(selitys);
+
+
+
         this.nimiLabel.setText(this.lintu.getNimi());
         this.latinaLabel.setText("(" + this.lintu.getLatina() + ")");
         this.heimoLabel.setText("Heimo: " + this.lintu.getHeimo());
-        this.linnunKuva.setIcon(new ImageIcon(latain.lataaKuva(lintu,"kuvat")));
-        this.kuvausTextArea.setText(latain.lataaSelitys(lintu,"selitykset"));
+        this.linnunKuva.setIcon(new ImageIcon(latain.lataaKuva(lintu, "Resources/kuvat/")));
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel heimoLabel;
@@ -126,4 +150,15 @@ public class LinnunKuvausGui extends javax.swing.JFrame {
     private javax.swing.JLabel linnunKuva;
     private javax.swing.JLabel nimiLabel;
     // End of variables declaration//GEN-END:variables
+
+public static String convertToUTF8(String s) {
+        String out = null;
+        try {
+            out = new String(s.getBytes("UTF-8"), "ISO-8859-1");
+        } catch (java.io.UnsupportedEncodingException e) {
+            return null;
+        }
+        return out;
+    }
+
 }

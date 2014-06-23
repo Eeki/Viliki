@@ -4,8 +4,6 @@
  */
 package viliki.virtuaalinenlintukirja.logiikka;
 
-import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import viliki.virtuaalinenlintukirja.logiikka.tallentajat.KuvaTallentaja;
@@ -25,29 +23,27 @@ public class Lintukirja {
     SelityksenTallentaja selityksenTallentaja;
 
     /**
-     *
-     * @param lahde
+     * Lintukirja luokan konstruktori
+     * @param lahde ladattavan json tiedsoton sijainti
      */
     public Lintukirja(String lahde) {
         json = new JsonAdapteri();
-        File lahdeTiedosto = new File(this.getClass().getResource(lahde).getFile());
-        this.lahde = lahdeTiedosto.getPath();
-        System.out.println(this.lahde);
+        this.lahde = lahde;
         this.kuvaTallentaja = new KuvaTallentaja();
         this.selityksenTallentaja = new SelityksenTallentaja();
     }
 
     /**
-     *
-     * @return
+     * Palauttaa kaikki linnut sisältävän HashMap:in, jossa avaimena on linnun nimi ja arvona lintu-olio
+     * @return linnut sisältävä HashMap
      */
     public HashMap<String, Lintu> palautaLinnutMap() {
         return linnutMap;
     }
 
     /**
-     *
-     * @return
+     * Palauttaa kaikki linntu-oliot sisältävän ArrayList:in
+     * @return linnut sisältävä ArrayList
      */
     public ArrayList<Lintu> palautaLinnutArrayList() {
         ArrayList<Lintu> palautettavaLinnutArrayList = new ArrayList<>();
@@ -59,7 +55,7 @@ public class Lintukirja {
     }
 
     /**
-     *
+     *Hakee linnut HashMap:in luokalta JsonAdapteri ja tallentaa sen Lintukirja luokalle.
      * @throws Exception
      */
     public void tuoLinnutJsonTiedostosta() throws Exception {
@@ -67,15 +63,18 @@ public class Lintukirja {
     }
 
     /**
-     *
-     * @param lintu
+     *Lisää linnun kuvan haluttuun kansioon, lisäksi tallentaa uuden linnun json tiedsotoon ja selityksen tekstitiedostoon 
+     * @param lintu tallennettava lintu-olio
+     * @param kuvanLahde linnun kuvan lähde levyllä
+     * @param selitys tallennettava selitys linnulle
+     * @return palauttaa totuusarvon true jos tallennus onnistui, false jos ei
      * @throws Exception
      */
     public boolean lisaaLintuTiedostoon(Lintu lintu, String kuvanLahde, String selitys) throws Exception {
         // tämä metodi lisää JSON tiedostoon linnun parametrit + /kuvat/ kansioon linnun kuvan ja /selitykset/ kansioon linnun selityksen
-        if (kuvaTallentaja.tallennaKuva(kuvanLahde, lintu.getKuva(),"kuvat")) {
-            if (json.lisaaLintuTiedostoon(lintu, this.lahde)) {
-                this.selityksenTallentaja.tallennaSelitys(selitys, lintu.getNimi(),"selitykset");
+        if (kuvaTallentaja.tallennaKuva(kuvanLahde, lintu.getKuva(),"Resources/kuvat/")) {
+            if (json.lisaaLintuTiedostoon(lintu, "Resources/JSON/linnut.json")) {
+                this.selityksenTallentaja.tallennaSelitys(selitys, lintu.getNimi(),"Resources/selitykset/");
                 tuoLinnutJsonTiedostosta(); // ladataan linnut uudelleen
                 TyokaluPakki.popUpViesti("Lintu lisättiin lintukirjaan", "Lintukirja");
                 return true;

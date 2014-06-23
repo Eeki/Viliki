@@ -179,7 +179,7 @@ public class PeliGui extends javax.swing.JFrame {
         if (this.kierrokset < pelattavatKierrokset) {
             this.pisteetTeksti.setText("Pisteet: " + this.pisteet);
             this.kierroksetTeksti.setText("Kierrokset: " + this.kierrokset + "/" + pelattavatKierrokset);
-            this.arvattavaLintuKuva.setIcon(new ImageIcon(latain.lataaKuva(linnut.get(this.kierrokset), "kuvat")));
+            this.arvattavaLintuKuva.setIcon(new ImageIcon(latain.lataaKuva(linnut.get(this.kierrokset), "Resources/kuvat/")));
         } else {
             lopetaPeli();
         }

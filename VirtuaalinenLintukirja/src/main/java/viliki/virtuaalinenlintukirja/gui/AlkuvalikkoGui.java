@@ -5,7 +5,6 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -131,7 +130,7 @@ public class AlkuvalikkoGui implements Runnable {
 
     private ImageIcon haeAlkuvalikonKuva() throws IOException {
         LinnunTietojenLatain latain = new LinnunTietojenLatain();
-        ImageIcon kuva = new ImageIcon(latain.lataaKuva(new Lintu("varpuspolloAlku", "", "", "varpuspolloAlku.png"), "kuvat"));
+        ImageIcon kuva = new ImageIcon(latain.lataaKuva(new Lintu("varpuspolloAlku", "", "", "varpuspolloAlku.png"), "Resources/kuvat/"));
         return kuva;
     }
 }

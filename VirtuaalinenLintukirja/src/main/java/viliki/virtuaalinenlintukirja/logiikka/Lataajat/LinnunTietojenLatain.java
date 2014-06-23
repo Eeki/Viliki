@@ -29,6 +29,8 @@ public class LinnunTietojenLatain {
      * syöttää lintu-olio, jonka perusteella metodi hakee kuvan, sekä
      * lahdekansion nimi josta kuva haetaan.
      *
+     * @param lintu 
+     * @param lahdeKansio 
      * @param Lintu lintu
      * @param String lahdekansio
      * @return BufferedImage kuva
@@ -36,17 +38,14 @@ public class LinnunTietojenLatain {
      * -kuvan
      */
     public BufferedImage lataaKuva(Lintu lintu, String lahdeKansio) throws IOException {
-
         BufferedImage kuva;
         try {
-            File filu = new File(getClass().getResource("/" + lahdeKansio + "/" + lintu.getKuva()).getFile());
-            kuva = ImageIO.read(filu);
+            kuva = ImageIO.read(new File(lahdeKansio+lintu.getKuva()));
         } catch (Exception ex) {
             System.out.println(ex);
-            kuva = ImageIO.read(new File(getClass().getResource("/kuvat/" + "noImage.png").getFile()));
+            kuva = ImageIO.read(LinnunTietojenLatain.class.getResourceAsStream("/kuvat/" + "noImage.png"));
             return kuva;
         }
-
         return kuva;
 
     }
@@ -56,6 +55,7 @@ public class LinnunTietojenLatain {
      * tiedostosta tekstin ja palauttaa sen String muodossa
      *
      * @param lintu
+     * @param lahdeKansio 
      * @param String lahdeKansio
      * @return String palautettava selitys
      * @throws IOException jos heittää virheen palauttaa myös String:in "Linnulla ei selitystä"
@@ -63,7 +63,7 @@ public class LinnunTietojenLatain {
     public String lataaSelitys(Lintu lintu, String lahdeKansio) throws IOException {
         TekstinLukija lukija = new TekstinLukija();
         try {
-            String palautettava = lukija.lueTeksti("/" + lahdeKansio + "/" + lintu.getSelitys() + ".txt");
+            String palautettava = lukija.lueTeksti(lahdeKansio + lintu.getSelitys() + ".txt");
             return palautettava;
         } catch (IOException ex) {
             return "Linnulla ei selitystä";

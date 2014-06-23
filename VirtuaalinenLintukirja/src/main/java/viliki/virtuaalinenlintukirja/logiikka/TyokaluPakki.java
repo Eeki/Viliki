@@ -8,16 +8,19 @@ import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 /**
+ * Tyokalupakki on luokka, jossa on lajitelma erillaisia staattisia apumetodeita
  *
  * @author Eeki
  */
 public class TyokaluPakki {
 
     /**
+     * Luo erillisessä ikkunassa olevan viestikentän, jossa voi ilmoittaa
+     * ohjelmassa tapahtuvia asioita
      *
-     * @param viesti
-     * @param sijainti
-     * @return
+     * @param viesti ruudulla näkyvä viesti
+     * @param sijainti miltä luokalta/metodilta viesti tulee
+     * @return totuusarvo true
      */
     public static boolean popUpViesti(String viesti, String sijainti) {
         JOptionPane.showMessageDialog(null, viesti, "InfoBoksi: " + sijainti, JOptionPane.INFORMATION_MESSAGE);
@@ -25,9 +28,11 @@ public class TyokaluPakki {
     }
 
     /**
+     * PoistaSkandit poistaa kaikki skandit ja muut merkit jotka voivat sotkea
+     * tiedostopolkuja
      *
-     * @param syote
-     * @return
+     * @param syote merkkijono josta poistetaan
+     * @return syötetty merkkijono ilman erikoismerkkejä
      */
     public static String poistaSkandit(String syote) {
         String ilmanSkandeja =
@@ -38,9 +43,11 @@ public class TyokaluPakki {
     }
 
     /**
+     * Palauttaa kuvatiedostojen .png, .gif ja .jpg tiedostotyypin. Jos ei ole
+     * joku näistä tiedostotyypeistä palauttaa jpg:n.
      *
-     * @param kuvanNimi
-     * @return
+     * @param kuvanNimi skaalattavan tiedoston polku
+     * @return tiedoston tyypin merkkijonona
      */
     public static String kuvaFormaatti(String kuvanNimi) {
         String teksti = kuvanNimi;
@@ -58,6 +65,12 @@ public class TyokaluPakki {
         return "jpg";
     }
 
+    /**
+     * Skaalaa kuvan lintukirjaan sopivaksi
+     *
+     * @param alkukuva skaalattava kuva
+     * @return skaalattu kuva
+     */
     public static BufferedImage kuvanSovittaja(BufferedImage alkukuva) {
         BufferedImage palautettavaKuva = alkukuva;
 
@@ -68,12 +81,12 @@ public class TyokaluPakki {
     }
 
     /**
-     * Apuluokka joka muuntaa ArrayList:in HashMapiksi
+     * Muuntaa lintu ArrayList:in HashMapiksi
      *
-     * @param ArrayList<Lintu> linnut
-     * @return HashMap<String, Lintu> palautettavatlinnut
+     * @param linnut arrayList linnuista
+     * @return palautettavatlinnut HashMap<String, Lintu>
      */
-    public static HashMap<String, Lintu> teeTuoduistaLinnuistaMap(ArrayList<Lintu> linnut) {
+    public static HashMap<String, Lintu> teeLintuArrayLististaHashMap(ArrayList<Lintu> linnut) {
         HashMap<String, Lintu> palautettavaLintuMap = new HashMap<>();
         for (Lintu lintu : linnut) {
             palautettavaLintuMap.put(lintu.getNimi(), lintu);

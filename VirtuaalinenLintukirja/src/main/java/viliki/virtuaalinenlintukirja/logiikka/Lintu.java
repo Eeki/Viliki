@@ -17,7 +17,7 @@ public class Lintu implements Comparator<Lintu> {
     private String selitys;
 
     /**
-     *
+     * Linntuluokan konstruktoriin pitää aina 
      * @param nimi
      * @param latina
      * @param heimo

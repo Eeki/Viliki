@@ -21,12 +21,13 @@ public class SelityksenTallentaja {
      *
      * @param selitys
      * @param nimi
+     * @param kohde 
      * @param tallennuksenKohde
      * @return Boolean
      */
     public boolean tallennaSelitys(String selitys, String nimi, String kohde) {
         try {
-            File tallennusFilu = new File(this.getClass().getResource("/" + kohde + "/").getPath() + TyokaluPakki.poistaSkandit(nimi) + ".txt");
+            File tallennusFilu = new File(kohde + TyokaluPakki.poistaSkandit(nimi) + ".txt");
             FileOutputStream os = new FileOutputStream(tallennusFilu);
             OutputStreamWriter osw = new OutputStreamWriter(os);
             Writer w = new BufferedWriter(osw);

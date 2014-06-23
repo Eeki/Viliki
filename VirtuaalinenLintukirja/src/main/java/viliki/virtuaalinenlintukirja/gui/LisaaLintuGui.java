@@ -221,7 +221,7 @@ public class LisaaLintuGui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonBrowseActionPerformed
     private void jButtonLisaaTietokantaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLisaaTietokantaanActionPerformed
         try {
-            lisaaLintu(jTextFieldNimi.getText(), jTextFieldLatina.getText(), jTextFieldHeimo.getText(), TyokaluPakki.poistaSkandit(jTextFieldNimi.getText()), jTextFieldKuvanPolku.getText(), jTextAreaSelitys.getText());
+            lisaaLintu(jTextFieldNimi.getText(), jTextFieldLatina.getText(), jTextFieldHeimo.getText(), TyokaluPakki.poistaSkandit(jTextFieldNimi.getText()+"."+TyokaluPakki.kuvaFormaatti(jTextFieldKuvanPolku.getText())), jTextFieldKuvanPolku.getText(), jTextAreaSelitys.getText());
         } catch (Exception ex) {
             TyokaluPakki.popUpViesti("Linnun lisääminen epäonnistui", "Lisaa lintu GUI");
             Logger
